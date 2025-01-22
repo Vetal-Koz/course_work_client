@@ -1,0 +1,4 @@
+.transparent-backdrop {
+  background-color: transparent !important;
+  pointer-events: none; /* Optional: prevents the backdrop from intercepting clicks */
+}

@@ -1,0 +1,5 @@
+<app-uniobject-update [uniobject]="subdivision" [isNested]="true"></app-uniobject-update>
+<h3>Chef: </h3>
+<input type="text" value="{{subdivision?.chef}}">
+<button *ngIf="!isNested" class="btn btn-primary">Save Changes</button>
+

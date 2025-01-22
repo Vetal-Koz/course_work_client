@@ -1,0 +1,6 @@
+<app-subdivision-update [subdivision]="department" [isNested]="true"></app-subdivision-update>
+<h3>Teaching focus: </h3>
+<input type="text" [value]="department?.teachingFocus">
+<h3>Budget: </h3>
+<input type="number" [value]="department?.budget">
+<button *ngIf="!isNested" class="btn btn-primary">Save Changes</button>
