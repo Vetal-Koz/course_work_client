@@ -1,29 +1,32 @@
-<span>{{ entityName }}</span>
-<button
-  cdkOverlayOrigin
-  #trigger="cdkOverlayOrigin"
-  [class.open]="actionMenuIsOpen"
-  (click)="actionMenuIsOpen = !actionMenuIsOpen">
-  Click me
-</button>
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="actionMenuIsOpen"
-  [cdkConnectedOverlayBackdropClass]="'transparent-backdrop'"
-  [cdkConnectedOverlayHasBackdrop]="true"
-  (overlayOutsideClick)="actionMenuIsOpen = false"
-  (backdropClick)="actionMenuIsOpen = false"
-  [cdkConnectedOverlayPositions]="[
-        {
-            originX: 'end',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'top'
-        },
+<div class="item-view">
+  <span class="entity-name">{{ entityName }}</span>
+  <button
+    class = "menu"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin"
+    [class.open]="actionMenuIsOpen"
+    (click)="actionMenuIsOpen = !actionMenuIsOpen">
+    <img class="menu-img" src="dots-menu.png" alt="menu-dots"/>
+  </button>
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="actionMenuIsOpen"
+    [cdkConnectedOverlayBackdropClass]="'transparent-backdrop'"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    (overlayOutsideClick)="actionMenuIsOpen = false"
+    (backdropClick)="actionMenuIsOpen = false"
+    [cdkConnectedOverlayPositions]="[
+          {
+              originX: 'end',
+              originY: 'top',
+              overlayX: 'start',
+              overlayY: 'top'
+          },
 
-    ]"
-  [cdkConnectedOverlayPush]="true"
-  >
-  <app-action-popover [entityId]="entityId"></app-action-popover>
-</ng-template>
+      ]"
+    [cdkConnectedOverlayPush]="true"
+    >
+    <app-action-popover [entityId]="entityId"></app-action-popover>
+  </ng-template>
+</div>

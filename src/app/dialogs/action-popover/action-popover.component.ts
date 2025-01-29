@@ -28,7 +28,9 @@ export class ActionPopoverComponent implements OnInit{
     const componentToOpen = RelatedEntitiesComponent;
     const dialogRef = this.dialog.open<string>(componentToOpen, {
       width: '400px',
-      data: {entityId: this.entityId}
+      data: {
+        entityId: this.entityId,
+      }
     })
   }
 

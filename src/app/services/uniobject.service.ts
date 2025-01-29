@@ -41,6 +41,10 @@ export class UniobjectService {
     )
   }
 
+  updateMajor(id: number, parentId: number): Observable<any> {
+    return this.http.patch(`${this.uniobjectsUrl}/${id}/attach-to/${parentId}`, null);
+  }
+
 
   constructor(private http: HttpClient) {}
 }

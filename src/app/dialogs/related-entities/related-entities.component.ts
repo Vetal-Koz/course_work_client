@@ -40,10 +40,11 @@ export class RelatedEntitiesComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  openCreateForm(componentName: string) : void {
-    const componentToOpen = CREATE_COMPONENTS[componentName];
+  openCreateForm(entityClassName: string) : void {
+    const componentToOpen = CREATE_COMPONENTS[entityClassName];
     const dialogRef = this.dialog.open(componentToOpen, {
       width: "400px",
+      data: {entityClassName: entityClassName}
     });
   }
 

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 
 @Component({
@@ -12,4 +12,8 @@ import {NgIf} from "@angular/common";
 })
 export class UniobjectCreateComponent {
   @Input() isNested = false;
+
+  constructor() {
+    console.log(this.constructor.name.replace(/_(.*?)CreateComponent/g, '$1'))
+  }
 }
