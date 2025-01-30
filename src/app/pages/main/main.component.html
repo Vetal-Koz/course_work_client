@@ -3,4 +3,11 @@
   <div class="data-container">
     <ng-container #dataContainer></ng-container>
   </div>
+  @if (this.uniobjectService.isUpdated) {
+    <app-main-form
+      [entityId]="uniobjectService.entityId"
+      [selectedEntityType]="this.uniobjectService.updatedEntityClass"
+    ></app-main-form>
+    <p>{{this.uniobjectService.updatedEntityClass}}</p>
+  }
 </div>

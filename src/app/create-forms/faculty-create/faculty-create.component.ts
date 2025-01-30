@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {NgIf} from "@angular/common";
-import {SubdivisionUpdateComponent} from "../../update-forms/subdivision-update/subdivision-update.component";
 import {SubdivisionCreateComponent} from "../subdivision-create/subdivision-create.component";
 
 @Component({
@@ -8,7 +7,6 @@ import {SubdivisionCreateComponent} from "../subdivision-create/subdivision-crea
   standalone: true,
   imports: [
     NgIf,
-    SubdivisionUpdateComponent,
     SubdivisionCreateComponent
   ],
   templateUrl: './faculty-create.component.html',

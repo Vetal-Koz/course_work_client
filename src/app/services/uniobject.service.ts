@@ -8,7 +8,11 @@ import {Uniobject} from "../models/uniobject.data";
   providedIn: 'root'
 })
 export class UniobjectService {
+  entityId = 0;
+  updatedEntityClass = "Uniobject";
+  isUpdated = false;
   private uniobjectsUrl = 'http://localhost:8080/api/uniobjects';
+  uniobjects: Uniobject[] = [];
 
   findAll(): Observable<Uniobject[]> {
     return this.http.get<ResponseContainerData<Uniobject[]>>(this.uniobjectsUrl)
@@ -30,7 +34,8 @@ export class UniobjectService {
   }
 
   findById(id: number): Observable<any> {
-    return this.http.get<ResponseContainerData<string>>(this.uniobjectsUrl + `/${id}`).pipe(
+    return this.http.get<ResponseContainerData<any>>(this.uniobjectsUrl + `/${id}`)
+      .pipe(
       map(res => res.data)
     );
   }
@@ -39,6 +44,10 @@ export class UniobjectService {
     return this.http.get<ResponseContainerData<string[]>>(this.uniobjectsUrl + `/${id}/classes`).pipe(
       map(res => res.data),
     )
+  }
+
+  update(id: number, request: any): Observable<any> {
+    return this.http.put(`${this.uniobjectsUrl}/${id}`, request);
   }
 
   updateMajor(id: number, parentId: number): Observable<any> {

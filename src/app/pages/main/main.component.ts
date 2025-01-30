@@ -1,18 +1,20 @@
 import {Component, ViewChild, ViewContainerRef} from '@angular/core';
 import {FORM_COMPONENTS} from "../../utils/form-mapping.util";
 import {ObjectViewComponent} from "../object-view/object-view.component";
+import {UniobjectService} from "../../services/uniobject.service";
+import {MainFormComponent} from "../../update-forms/main-form/main-form.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ObjectViewComponent],
+  imports: [ObjectViewComponent, MainFormComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
   @ViewChild('dataContainer', {read: ViewContainerRef, static: true})  dataContainer!: ViewContainerRef;
 
-  constructor() {}
+  constructor(protected uniobjectService: UniobjectService) {}
 
   loadForm(data: {entityId: number, className: string}): void {
     const dataContainer = FORM_COMPONENTS[data.className];

@@ -23,7 +23,7 @@
                     itemTemplate="node-list"
       >
         <div *dxTemplate="let node of 'node-list'">
-          <app-node [entityId]="node.id" [entityName]="node.name"></app-node>
+          <app-node [entity]="{ id: node.id, name: node.name, className: node.classEntityName }"></app-node>
         </div>
       </dx-tree-view>
     </dx-sortable>

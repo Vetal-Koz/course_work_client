@@ -15,6 +15,5 @@ import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 })
 export class NodeComponent {
   actionMenuIsOpen = false;
-  @Input() entityName?: string;
-  @Input() entityId!: number;
+  @Input() entity!: {id: number, name: string, className: string};
 }

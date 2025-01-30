@@ -1,5 +1,5 @@
 <div class="item-view">
-  <span class="entity-name">{{ entityName }}</span>
+  <span class="entity-name">{{ entity.name }}</span>
   <button
     class = "menu"
     cdkOverlayOrigin
@@ -27,6 +27,6 @@
       ]"
     [cdkConnectedOverlayPush]="true"
     >
-    <app-action-popover [entityId]="entityId"></app-action-popover>
+    <app-action-popover [entity]="{ id: entity.id, className: entity.className }"></app-action-popover>
   </ng-template>
 </div>

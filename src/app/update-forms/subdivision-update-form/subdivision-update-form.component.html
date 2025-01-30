@@ -1,0 +1,7 @@
+<form [formGroup]="subdivisionForm">
+  <!-- Вставка форми UniobjectEntity як вкладеної -->
+  <app-uniobject-update-form [parentForm]="parentForm"></app-uniobject-update-form>
+
+  <label for="chef">Chef:</label>
+  <input id="chef" formControlName="chef" />
+</form>

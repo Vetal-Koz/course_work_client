@@ -33,7 +33,7 @@ export class ObjectViewComponent implements OnInit {
         className: string
       }>();
   selectedEntityId?: number;
-  uniobjects: Uniobject[] = [];
+  uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
   uniobjectsForTree: Uniobject[] = [];
   mainObject? : Uniobject;
 
@@ -63,7 +63,7 @@ export class ObjectViewComponent implements OnInit {
         this.uniobjectService.findRelatedById(id as number).subscribe(res => {
           this.uniobjects.push(...res);
           this.mainObject?.items.push(...res);
-          console.log(this.uniobjectsForTree);
+          console.log(this.uniobjectService.uniobjects);
           this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
         });
         this.mainObject.visited = true;

@@ -1,6 +1,6 @@
 import {Subdivision} from "./subdivision.data";
 
 export interface Faculty extends Subdivision {
-  curricula?: string | null,
+  curricula: string,
   facultyLocation: string
 }
