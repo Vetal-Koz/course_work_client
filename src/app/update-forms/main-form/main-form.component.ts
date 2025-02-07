@@ -1,4 +1,13 @@
-import {Component, ComponentFactoryResolver, Injector, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver, EventEmitter,
+  Injector,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {SubdivisionUpdateFormComponent} from "../subdivision-update-form/subdivision-update-form.component";
@@ -7,7 +16,6 @@ import {NgIf, NgComponentOutlet} from "@angular/common";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DepartmentUpdateFormComponent} from "../department-update-form/department-update-form.component";
 import {UPDATE_COMPONENTS} from "../../utils/update-component-mapping.util";
-import {FORM_COMPONENTS} from "../../utils/form-mapping.util";
 
 @Component({
   selector: 'app-main-form',
@@ -26,6 +34,7 @@ import {FORM_COMPONENTS} from "../../utils/form-mapping.util";
 })
 export class MainFormComponent implements OnInit {
   @ViewChild('classUpdateForm', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
+  @Output() closeDialog = new EventEmitter();
   mainForm: FormGroup;
   major!: number;
   @Input({required: true}) selectedEntityType!: string;
@@ -49,6 +58,7 @@ export class MainFormComponent implements OnInit {
 
   onCancelClick() {
     this.uniobjectService.isUpdated = false;
+    this.closeDialog.emit();
   }
 
   onSubmit() {
@@ -66,6 +76,7 @@ export class MainFormComponent implements OnInit {
     }
     this.uniobjectService.update(this.entityId, request).subscribe();
     this.uniobjectService.isUpdated = false;
+    this.closeDialog.emit();
   }
 
   loadForm(): void {

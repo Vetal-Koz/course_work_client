@@ -1,17 +1,23 @@
 <div class="body">
-  <app-object-view (rightClickEvent)="loadForm($event)"/>
+  <app-object-view (onCreateClick)="showCreateDialog()"
+                   (onUpdateClick)="showUpdateDialog()"
+                   (rightClickEvent)="loadForm($event)"/>
   <div class="data-container">
     <ng-container #dataContainer></ng-container>
   </div>
-  @if (this.uniobjectService.isUpdated) {
-    <app-main-form
-      [entityId]="uniobjectService.entityId"
-      [selectedEntityType]="this.uniobjectService.updatedEntityClass"
-    ></app-main-form>
-    <p>{{this.uniobjectService.updatedEntityClass}}</p>
-  }
-  @if (this.uniobjectService.isCreated) {
-    <app-main-form-create [parentId]="this.uniobjectService.parentId" (createdNew)="onCreatedNew()">
-    </app-main-form-create>
-  }
+  <dialog #updateDialog>
+    @if (this.uniobjectService.isUpdated) {
+      <app-main-form (closeDialog)="closeUpdateDialog()"
+                     [entityId]="uniobjectService.entityId"
+                     [selectedEntityType]="this.uniobjectService.updatedEntityClass">
+      </app-main-form>
+    }
+  </dialog>
+  <dialog #createDialog>
+    @if (this.uniobjectService.isCreated) {
+      <app-main-form-create [parentId]="this.uniobjectService.parentId"
+                            (createdNew)="closeCreateDialog()">
+      </app-main-form-create>
+    }
+  </dialog>
 </div>

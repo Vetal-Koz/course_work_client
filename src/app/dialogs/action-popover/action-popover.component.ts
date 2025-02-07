@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Dialog} from '@angular/cdk/dialog';
 import {UniobjectService} from "../../services/uniobject.service";
 
@@ -11,6 +11,8 @@ import {UniobjectService} from "../../services/uniobject.service";
 })
 export class ActionPopoverComponent implements OnInit{
   @Input() entity!: {id: number, className: string}
+  @Output() onUpdateClick = new EventEmitter();
+  @Output() onCreateClick = new EventEmitter();
 
   constructor(private dialog: Dialog, private uniobjectService: UniobjectService) {}
 
@@ -18,11 +20,13 @@ export class ActionPopoverComponent implements OnInit{
   }
 
   onCreate() {
+    this.onCreateClick.emit();
     this.uniobjectService.isCreated = true;
     this.uniobjectService.parentId = this.entity.id;
   }
 
   onUpdate() {
+    this.onUpdateClick.emit();
     this.uniobjectService.isUpdated = true;
     this.uniobjectService.updatedEntityClass = this.entity.className;
     this.uniobjectService.entityId = this.entity.id;

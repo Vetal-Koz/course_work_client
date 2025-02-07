@@ -33,6 +33,8 @@ export class ObjectViewComponent implements OnInit {
         entityId: number,
         className: string
       }>();
+  @Output() onUpdateClick = new EventEmitter();
+  @Output() onCreateClick = new EventEmitter();
   selectedEntityId?: number;
   uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
   uniobjectsForTree: Uniobject[] = [];
@@ -78,7 +80,6 @@ export class ObjectViewComponent implements OnInit {
       }
     }
   }
-
 
   onDragChange(e: DxSortableTypes.DragChangeEvent) {
     if (e.fromComponent === e.toComponent) {
@@ -236,15 +237,6 @@ export class ObjectViewComponent implements OnInit {
     return node === null || node.parent === null ? rootArray : node.parent.itemData.items;
   }
 
-  getUniobjectContainingArray(uniobject: Uniobject, rootArray: Uniobject[]) {
-    if (uniobject === null || uniobject.major === null || uniobject.major === 0) {
-      return this.uniobjectsForTree;
-    } else {
-      return rootArray.find((obj) => obj.id == uniobject.major)!.items;
-    }
-
-  }
-
   isChildNode(parentNode: Node, childNode: Node) {
     let parent = childNode.parent;
     while (parent !== null) {
@@ -272,5 +264,11 @@ export class ObjectViewComponent implements OnInit {
     return null;
   }
 
+  onUpdate() {
+    this.onUpdateClick.emit();
+  }
 
+  onCreate() {
+    this.onCreateClick.emit();
+  }
 }

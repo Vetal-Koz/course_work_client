@@ -5,12 +5,8 @@
       <option [value]="type">{{ type }}</option>
     }
   </select>
-
-  <!-- Вставка відповідних компонентів в залежності від вибору -->
-  <app-uniobject-create-form *ngIf="selectedEntityType === 'Uniobject'" [parentForm]="mainForm"></app-uniobject-create-form>
-  <app-subdivision-create-form *ngIf="selectedEntityType === 'Subdivision'" [parentForm]="mainForm"></app-subdivision-create-form>
-  <app-faculty-create-form *ngIf="selectedEntityType === 'Faculty'" [parentForm]="mainForm"></app-faculty-create-form>
-  <app-department-create-form *ngIf="selectedEntityType === 'Department'" [parentForm]="mainForm"></app-department-create-form>
-
+  <ng-container #classCreateForm></ng-container>
   <button type="submit">Submit</button>
+  <br>
+  <button type="button" (click)="onCancel()">Cancel</button>
 </form>

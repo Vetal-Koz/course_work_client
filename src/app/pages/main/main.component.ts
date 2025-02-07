@@ -1,4 +1,4 @@
-import {Component, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {FORM_COMPONENTS} from "../../utils/form-mapping.util";
 import {ObjectViewComponent} from "../object-view/object-view.component";
 import {UniobjectService} from "../../services/uniobject.service";
@@ -14,6 +14,8 @@ import {MainFormCreateComponent} from "../../create-forms/main-form-create/main-
 })
 export class MainComponent {
   @ViewChild('dataContainer', {read: ViewContainerRef, static: true})  dataContainer!: ViewContainerRef;
+  @ViewChild("updateDialog")  updateDialog!: ElementRef<HTMLDialogElement>;
+  @ViewChild("createDialog") createDialog!: ElementRef<HTMLDialogElement>;
 
   constructor(protected uniobjectService: UniobjectService) {}
 
@@ -27,7 +29,20 @@ export class MainComponent {
     }
   }
 
-  onCreatedNew() {
-    this.uniobjectService.uniobjects = this.uniobjectService.uniobjects;
+  showUpdateDialog(): void {
+    this.updateDialog.nativeElement.showModal();
   }
+
+  closeUpdateDialog() {
+    this.updateDialog.nativeElement.close();
+  }
+
+  showCreateDialog(): void {
+    this.createDialog.nativeElement.showModal();
+  }
+
+  closeCreateDialog() {
+    this.createDialog.nativeElement.close();
+  }
+
 }

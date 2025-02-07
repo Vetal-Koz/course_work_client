@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ActionPopoverComponent} from "../../dialogs/action-popover/action-popover.component";
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 
@@ -16,4 +16,16 @@ import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 export class NodeComponent {
   actionMenuIsOpen = false;
   @Input() entity!: {id: number, name: string, className: string};
+  @Output() onUpdateClick = new EventEmitter();
+  @Output() onCreateClick = new EventEmitter();
+
+
+
+  onUpdate() {
+    this.onUpdateClick.emit();
+  }
+
+  onCreate() {
+    this.onCreateClick.emit();
+  }
 }

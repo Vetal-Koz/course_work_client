@@ -5,7 +5,8 @@
     cdkOverlayOrigin
     #trigger="cdkOverlayOrigin"
     [class.open]="actionMenuIsOpen"
-    (click)="actionMenuIsOpen = !actionMenuIsOpen">
+    (click)="actionMenuIsOpen = !actionMenuIsOpen"
+  >
     <img class="menu-img" src="dots-menu.png" alt="menu-dots"/>
   </button>
   <ng-template
@@ -27,6 +28,8 @@
       ]"
     [cdkConnectedOverlayPush]="true"
     >
-    <app-action-popover [entity]="{ id: entity.id, className: entity.className }"></app-action-popover>
+    <app-action-popover (onCreateClick)="onCreate()"
+                        (onUpdateClick)="onUpdate()"
+                        [entity]="{ id: entity.id, className: entity.className }"/>
   </ng-template>
 </div>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectService} from "../../services/uniobject.service";
 import {SubdivisionCreateFormComponent} from "../subdivision-create-form/subdivision-create-form.component";
@@ -7,6 +7,7 @@ import {FacultyCreateFormComponent} from "../faculty-create-form/faculty-create-
 import {NgIf} from "@angular/common";
 import {DepartmentCreateFormComponent} from "../department-create-form/department-create-form.component";
 import {Uniobject} from "../../models/uniobject.data";
+import {CREATE_COMPONENTS} from "../../utils/create-component-mapping.utils";
 
 @Component({
   selector: 'app-main-form-create',
@@ -28,6 +29,8 @@ export class MainFormCreateComponent implements OnInit {
   @Input({required: true}) parentId!: number;
   relatedTypes: string[] = [];
   @Output() createdNew = new EventEmitter();
+  @ViewChild('classCreateForm', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
+
 
   constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
     this.mainForm = this.fb.group({
@@ -39,9 +42,23 @@ export class MainFormCreateComponent implements OnInit {
     this.uniobjectService.findAllRelatedClasses(this.parentId).subscribe({
       next: ((res) => this.relatedTypes = res)
     })
+    this.mainForm.get('classEntityName')?.valueChanges.subscribe((newValue) => {
+      this.loadForm(newValue);
+      console.log(newValue);
+    });
   }
 
-
+  loadForm(className: string): void {
+    const dataContainer = CREATE_COMPONENTS[className];
+    if (dataContainer) {
+      this.container.clear();
+      const componentRef = this.container.createComponent(dataContainer);
+      // @ts-ignore
+      componentRef.instance.parentForm = this.mainForm;
+    }else {
+      this.container.clear();
+    }
+  }
 
   onEntityTypeChange() {
     const entityType = this.mainForm.get('classEntityName')?.value;
@@ -73,6 +90,11 @@ export class MainFormCreateComponent implements OnInit {
           this.addValueToUniobjects(res);
         })
       });
+    this.uniobjectService.isCreated = false;
+    this.createdNew.emit();
+  }
+
+  onCancel() {
     this.uniobjectService.isCreated = false;
     this.createdNew.emit();
   }

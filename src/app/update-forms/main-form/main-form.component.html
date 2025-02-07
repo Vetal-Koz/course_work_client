@@ -1,12 +1,6 @@
 <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
 
-<!--  <app-uniobject-update-form *ngIf="selectedEntityType === 'Uniobject'" [parentForm]="mainForm"></app-uniobject-update-form>-->
-<!--  <app-subdivision-update-form *ngIf="selectedEntityType === 'Subdivision'" [parentForm]="mainForm"></app-subdivision-update-form>-->
-<!--  <app-faculty-update-form *ngIf="selectedEntityType === 'Faculty'" [parentForm]="mainForm"></app-faculty-update-form>-->
-<!--  <app-department-update-form *ngIf="selectedEntityType === 'Department'" [parentForm]="mainForm"></app-department-update-form>-->
-
   <ng-container #classUpdateForm></ng-container>
-
 
   <button type="submit">Submit</button>
   <button (click)="onCancelClick()" type="button">Cancel</button>
