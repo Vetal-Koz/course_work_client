@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {ResponseContainerData} from "../models/response-container.data";
 import {Uniobject} from "../models/uniobject.data";
 
@@ -9,10 +9,14 @@ import {Uniobject} from "../models/uniobject.data";
 })
 export class UniobjectService {
   entityId = 0;
+  parentId = 0;
   updatedEntityClass = "Uniobject";
   isUpdated = false;
+  isCreated = false;
   private uniobjectsUrl = 'http://localhost:8080/api/uniobjects';
   uniobjects: Uniobject[] = [];
+  private isUpdatedTreeSubject = new BehaviorSubject<boolean>(false);
+  isUpdatedTree$ = this.isUpdatedTreeSubject.asObservable();
 
   findAll(): Observable<Uniobject[]> {
     return this.http.get<ResponseContainerData<Uniobject[]>>(this.uniobjectsUrl)
@@ -50,10 +54,23 @@ export class UniobjectService {
     return this.http.put(`${this.uniobjectsUrl}/${id}`, request);
   }
 
+  create(request: any): Observable<any> {
+    return this.http.post<ResponseContainerData<Uniobject>>(`${this.uniobjectsUrl}`, request).pipe(
+      map(res => res.data)
+    );
+  }
+
   updateMajor(id: number, parentId: number): Observable<any> {
     return this.http.patch(`${this.uniobjectsUrl}/${id}/attach-to/${parentId}`, null);
   }
 
+  setUpdatedTree(value: boolean) {
+    this.isUpdatedTreeSubject.next(value);
+  }
+
+  getUpdatedTree(): boolean {
+    return this.isUpdatedTreeSubject.value;
+  }
 
   constructor(private http: HttpClient) {}
 }

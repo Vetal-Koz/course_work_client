@@ -10,4 +10,8 @@
     ></app-main-form>
     <p>{{this.uniobjectService.updatedEntityClass}}</p>
   }
+  @if (this.uniobjectService.isCreated) {
+    <app-main-form-create [parentId]="this.uniobjectService.parentId" (createdNew)="onCreatedNew()">
+    </app-main-form-create>
+  }
 </div>

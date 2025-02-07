@@ -5,6 +5,7 @@ import {Uniobject} from "../../models/uniobject.data";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DxSortableTypes} from "devextreme-angular/ui/sortable";
 import {DxTreeViewTypes} from "devextreme-angular/ui/tree-view";
+import {Subscription} from "rxjs";
 
 
 type TreeView = ReturnType<ObjectViewComponent['getTreeView']>;
@@ -36,6 +37,7 @@ export class ObjectViewComponent implements OnInit {
   uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
   uniobjectsForTree: Uniobject[] = [];
   mainObject? : Uniobject;
+  private subscription!: Subscription;
 
 
   constructor(private uniobjectService: UniobjectService) {
@@ -46,6 +48,12 @@ export class ObjectViewComponent implements OnInit {
       this.uniobjects.push(...res);
       this.uniobjectsForTree.push(...res);
     });
+    this.subscription = this.uniobjectService.isUpdatedTree$.subscribe((value) => {
+      if (value) {
+        this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
+      }
+    })
+    this.uniobjectService.setUpdatedTree(!this.uniobjectService.getUpdatedTree());
   }
 
   onHandleRightClick(event: any) : void {

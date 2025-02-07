@@ -1,0 +1,10 @@
+<form [formGroup]="facultyForm">
+  <!-- Вставка форми SubdivisionEntity як вкладеної -->
+  <app-subdivision-create-form [parentForm]="parentForm"></app-subdivision-create-form>
+
+  <label for="curricula">Curricula:</label>
+  <input id="curricula" formControlName="curricula" />
+
+  <label for="facultyLocation">Faculty Location:</label>
+  <input id="facultyLocation" formControlName="facultyLocation" />
+</form>

@@ -1,0 +1,9 @@
+<form [formGroup]="facultyForm">
+  <app-subdivision-create-form [parentForm]="parentForm"></app-subdivision-create-form>
+
+  <label for="teachingFocus">Teaching Focus:</label>
+  <input id="teachingFocus" formControlName="teachingFocus" />
+
+  <label for="budget">Budget:</label>
+  <input id="budget" type="number" formControlName="budget" />
+</form>

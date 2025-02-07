@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Dialog} from '@angular/cdk/dialog';
 import {UniobjectService} from "../../services/uniobject.service";
-import {RelatedEntitiesComponent} from "../related-entities/related-entities.component";
 
 @Component({
   selector: 'app-action-popover',
@@ -18,8 +17,9 @@ export class ActionPopoverComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  openCreateForm() : void {
-
+  onCreate() {
+    this.uniobjectService.isCreated = true;
+    this.uniobjectService.parentId = this.entity.id;
   }
 
   onUpdate() {

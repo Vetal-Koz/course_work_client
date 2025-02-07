@@ -3,11 +3,12 @@ import {FORM_COMPONENTS} from "../../utils/form-mapping.util";
 import {ObjectViewComponent} from "../object-view/object-view.component";
 import {UniobjectService} from "../../services/uniobject.service";
 import {MainFormComponent} from "../../update-forms/main-form/main-form.component";
+import {MainFormCreateComponent} from "../../create-forms/main-form-create/main-form-create.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ObjectViewComponent, MainFormComponent],
+  imports: [ObjectViewComponent, MainFormComponent, MainFormCreateComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -24,5 +25,9 @@ export class MainComponent {
       // @ts-ignore
       componentRef.instance.entityId = data.entityId;
     }
+  }
+
+  onCreatedNew() {
+    this.uniobjectService.uniobjects = this.uniobjectService.uniobjects;
   }
 }
