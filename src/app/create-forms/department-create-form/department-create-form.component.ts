@@ -19,18 +19,18 @@ import {SubdivisionCreateFormComponent} from "../subdivision-create-form/subdivi
 })
 export class DepartmentCreateFormComponent implements OnInit {
   @Input({required: true}) parentForm!: FormGroup;
-  facultyForm: FormGroup;
+  departmentForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.facultyForm = this.fb.group({
+    this.departmentForm = this.fb.group({
       teachingFocus: ['', Validators.required],
-      budget: [null, Validators.required, Validators.min(0)],
+      budget: [null, Validators.required],
     });
 
   }
 
   ngOnInit(): void {
-    this.parentForm.addControl('teachingFocus', this.facultyForm.get('teachingFocus'));
-    this.parentForm.addControl('budget', this.facultyForm.get('budget'));
+    this.parentForm.addControl('teachingFocus', this.departmentForm.get('teachingFocus'));
+    this.parentForm.addControl('budget', this.departmentForm.get('budget'));
   }
 }

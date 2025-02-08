@@ -15,7 +15,7 @@ export class UniobjectService {
   isCreated = false;
   private uniobjectsUrl = 'http://localhost:8080/api/uniobjects';
   uniobjects: Uniobject[] = [];
-  private isUpdatedTreeSubject = new BehaviorSubject<boolean>(false);
+  private isUpdatedTreeSubject = new BehaviorSubject<any>(null);
   isUpdatedTree$ = this.isUpdatedTreeSubject.asObservable();
 
   findAll(): Observable<Uniobject[]> {
@@ -50,6 +50,12 @@ export class UniobjectService {
     )
   }
 
+  findAllClasses(): Observable<string[]> {
+    return this.http.get<ResponseContainerData<string[]>>(this.uniobjectsUrl + `/root/classes`).pipe(
+      map(res => res.data),
+    )
+  }
+
   update(id: number, request: any): Observable<any> {
     return this.http.put(`${this.uniobjectsUrl}/${id}`, request);
   }
@@ -64,11 +70,11 @@ export class UniobjectService {
     return this.http.patch(`${this.uniobjectsUrl}/${id}/attach-to/${parentId}`, null);
   }
 
-  setUpdatedTree(value: boolean) {
+  setUpdatedTree(value: any) {
     this.isUpdatedTreeSubject.next(value);
   }
 
-  getUpdatedTree(): boolean {
+  getUpdatedTree(): any {
     return this.isUpdatedTreeSubject.value;
   }
 

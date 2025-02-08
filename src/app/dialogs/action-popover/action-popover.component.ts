@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Dialog} from '@angular/cdk/dialog';
 import {UniobjectService} from "../../services/uniobject.service";
 
 @Component({
@@ -11,10 +10,11 @@ import {UniobjectService} from "../../services/uniobject.service";
 })
 export class ActionPopoverComponent implements OnInit{
   @Input() entity!: {id: number, className: string}
+  @Input() isFromRoot: boolean = false;
   @Output() onUpdateClick = new EventEmitter();
   @Output() onCreateClick = new EventEmitter();
 
-  constructor(private dialog: Dialog, private uniobjectService: UniobjectService) {}
+  constructor(private uniobjectService: UniobjectService) {}
 
   ngOnInit(): void {
   }

@@ -39,12 +39,18 @@ export class MainFormCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uniobjectService.findAllRelatedClasses(this.parentId).subscribe({
-      next: ((res) => this.relatedTypes = res)
-    })
+    if (this.parentId == 0) {
+      this.uniobjectService.findAllClasses().subscribe({
+        next: ((res) => this.relatedTypes = res)
+      });
+    }else {
+      this.uniobjectService.findAllRelatedClasses(this.parentId).subscribe({
+        next: ((res) => this.relatedTypes = res)
+      })
+    }
+
     this.mainForm.get('classEntityName')?.valueChanges.subscribe((newValue) => {
       this.loadForm(newValue);
-      console.log(newValue);
     });
   }
 
@@ -72,7 +78,7 @@ export class MainFormCreateComponent implements OnInit {
     if (parentObj) {
       parentObj.items.push(request);
     }
-    this.uniobjectService.setUpdatedTree(true);
+    this.uniobjectService.setUpdatedTree(request);
   }
 
   onSubmit() {

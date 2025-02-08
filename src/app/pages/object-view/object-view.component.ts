@@ -6,6 +6,8 @@ import {UniobjectService} from "../../services/uniobject.service";
 import {DxSortableTypes} from "devextreme-angular/ui/sortable";
 import {DxTreeViewTypes} from "devextreme-angular/ui/tree-view";
 import {Subscription} from "rxjs";
+import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
+import {ActionPopoverComponent} from "../../dialogs/action-popover/action-popover.component";
 
 
 type TreeView = ReturnType<ObjectViewComponent['getTreeView']>;
@@ -15,12 +17,15 @@ type Item = DxTreeViewTypes.Item;
 @Component({
   selector: 'app-object-view',
   standalone: true,
-    imports: [
-        DxSortableModule,
-        DxTemplateModule,
-        DxTreeViewModule,
-        NodeComponent
-    ],
+  imports: [
+    DxSortableModule,
+    DxTemplateModule,
+    DxTreeViewModule,
+    NodeComponent,
+    CdkOverlayOrigin,
+    ActionPopoverComponent,
+    CdkConnectedOverlay
+  ],
   templateUrl: './object-view.component.html',
   styleUrl: './object-view.component.css'
 })
@@ -35,6 +40,7 @@ export class ObjectViewComponent implements OnInit {
       }>();
   @Output() onUpdateClick = new EventEmitter();
   @Output() onCreateClick = new EventEmitter();
+  actionMenuIsOpen = false;
   selectedEntityId?: number;
   uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
   uniobjectsForTree: Uniobject[] = [];
@@ -51,15 +57,19 @@ export class ObjectViewComponent implements OnInit {
       this.uniobjectsForTree.push(...res);
     });
     this.subscription = this.uniobjectService.isUpdatedTree$.subscribe((value) => {
-      if (value) {
-        this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
+      if (value != null) {
+        if (value.major == 0) {
+          this.uniobjectsForTree.push(value);
+        }
       }
     })
-    this.uniobjectService.setUpdatedTree(!this.uniobjectService.getUpdatedTree());
+    this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
+    // this.uniobjectService.setUpdatedTree(!this.uniobjectService.getUpdatedTree());
   }
 
   onHandleRightClick(event: any) : void {
     event.event.preventDefault();
+    event.event.stopPropagation();
     const uniobject = event.itemData as Uniobject;
     this.selectedEntityId = uniobject.id;
     this.rightClickEvent.emit({entityId: uniobject.id, className: uniobject.classEntityName});
@@ -271,4 +281,12 @@ export class ObjectViewComponent implements OnInit {
   onCreate() {
     this.onCreateClick.emit();
   }
+
+  onRightButtonClick(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("Open");
+    this.actionMenuIsOpen = !this.actionMenuIsOpen
+  }
+
 }
