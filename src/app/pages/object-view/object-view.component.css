@@ -1,15 +1,7 @@
-
-.body {
-  background: white;
-  height: 3000px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-
-
 .tree-data {
+  border-top: solid;
+  border-top-width: 1px;
+  border-top-color: #b0aea5;
   background: #e3dddc;
   border-right: solid;
   border-right-color: #b0aea5;

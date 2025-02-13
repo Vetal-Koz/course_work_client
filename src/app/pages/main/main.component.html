@@ -2,7 +2,8 @@
   <app-object-view (onCreateClick)="showCreateDialog()"
                    (onUpdateClick)="showUpdateDialog()"
                    (rightClickEvent)="loadForm($event)"/>
-  <div class="data-container">
+  <div class="info">
+    <div></div>
     <ng-container #dataContainer></ng-container>
   </div>
   <dialog #updateDialog>

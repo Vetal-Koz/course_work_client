@@ -17,6 +17,8 @@ export class UniobjectService {
   uniobjects: Uniobject[] = [];
   private isUpdatedTreeSubject = new BehaviorSubject<any>(null);
   isUpdatedTree$ = this.isUpdatedTreeSubject.asObservable();
+  private isDeletedItem = new BehaviorSubject<any>(null);
+  isDeletedItem$ = this.isDeletedItem.asObservable();
 
   findAll(): Observable<Uniobject[]> {
     return this.http.get<ResponseContainerData<Uniobject[]>>(this.uniobjectsUrl)
@@ -70,8 +72,16 @@ export class UniobjectService {
     return this.http.patch(`${this.uniobjectsUrl}/${id}/attach-to/${parentId}`, null);
   }
 
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.uniobjectsUrl}/${id}`);
+  }
+
   setUpdatedTree(value: any) {
     this.isUpdatedTreeSubject.next(value);
+  }
+
+  setDeletedItemId(value: number) {
+    this.isDeletedItem.next(value);
   }
 
   getUpdatedTree(): any {

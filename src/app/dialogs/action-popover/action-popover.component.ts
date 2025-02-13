@@ -32,4 +32,11 @@ export class ActionPopoverComponent implements OnInit{
     this.uniobjectService.entityId = this.entity.id;
   }
 
+  onDelete() {
+    this.uniobjectService.uniobjects =
+      this.uniobjectService.uniobjects.filter((obj) => obj.id != this.entity.id)
+    this.uniobjectService.setDeletedItemId(this.entity.id);
+    // this.uniobjectService.delete(this.entity.id).subscribe();
+  }
+
 }

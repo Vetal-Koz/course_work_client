@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Uniobject} from "../../models/uniobject.data";
 import {UniobjectService} from "../../services/uniobject.service";
-import {FacultyComponent} from "../faculty/faculty.component";
 import {UniobjectComponent} from "../uniobject/uniobject.component";
 import {Subdivision} from "../../models/subdivision.data";
 

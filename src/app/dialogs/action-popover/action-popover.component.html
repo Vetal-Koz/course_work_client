@@ -1,7 +1,7 @@
 <div class="action-menu">
-  <button (click)="onCreate()">Insert</button>
+  <button class="insert-button" (click)="onCreate()">Insert</button>
   @if (!isFromRoot) {
-    <button (click)="onUpdate()">Update</button>
-    <button>Delete</button>
+    <button class="update-button" (click)="onUpdate()">Update</button>
+    <button class="delete-button" (click)="onDelete()">Delete</button>
   }
 </div>

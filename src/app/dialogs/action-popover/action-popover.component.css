@@ -2,3 +2,28 @@
   background-color: transparent !important;
   pointer-events: none; /* Optional: prevents the backdrop from intercepting clicks */
 }
+
+.action-menu {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  padding-top: 3px;
+}
+
+button {
+  border: none;
+  background: none;
+  height: 18px;
+  font-size: 13px;
+  align-items: center;
+  vertical-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 3px;
+}
+
+button:hover {
+  background-color: rgba(0, 110, 248, 0.4);
+}
+

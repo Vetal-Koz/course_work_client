@@ -1,33 +1,19 @@
 
 .body {
-  background: white;
-  height: 3000px;
+  padding-top: 50px;
+  height: 750px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-
-
-.tree-data {
   background: #e3dddc;
-  border-right: solid;
-  border-right-color: #b0aea5;
+  flex-direction: row;
 }
-/*.body {*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  justify-content: space-around;*/
-/*  align-items: flex-start;*/
-/*}*/
 
-/*.treeView {*/
-/*  width: 400px;*/
-/*}*/
+.info {
+  width: 100%;
+  margin-left: 40px;
+  border-top-width: 1px;
+  border-top-color: black;
+}
 
-/*.myForm {*/
-/*  width: 500px;*/
-/*}*/
 
 * {
   font-family: Lato;
@@ -74,6 +60,13 @@
 .item-notes {
   margin-left:20px;
   color:#aaa;
+}
+
+dialog {
+  border-style: solid;
+  border-width: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 }
 
 

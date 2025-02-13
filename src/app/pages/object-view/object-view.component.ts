@@ -45,7 +45,8 @@ export class ObjectViewComponent implements OnInit {
   uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
   uniobjectsForTree: Uniobject[] = [];
   mainObject? : Uniobject;
-  private subscription!: Subscription;
+  private createItemSub!: Subscription;
+  private deleteItemSub!: Subscription;
 
 
   constructor(private uniobjectService: UniobjectService) {
@@ -56,11 +57,19 @@ export class ObjectViewComponent implements OnInit {
       this.uniobjects.push(...res);
       this.uniobjectsForTree.push(...res);
     });
-    this.subscription = this.uniobjectService.isUpdatedTree$.subscribe((value) => {
+    this.createItemSub = this.uniobjectService.isUpdatedTree$.subscribe((value) => {
       if (value != null) {
         if (value.major == 0) {
           this.uniobjectsForTree.push(value);
         }
+      }
+    })
+
+    this.deleteItemSub = this.uniobjectService.isDeletedItem$.subscribe((id) => {
+      if (id != null) {
+        this.deleteUniobjectById(id, this.uniobjectsForTree);
+        console.log(this.uniobjectsForTree)
+        this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
       }
     })
     this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
@@ -287,6 +296,22 @@ export class ObjectViewComponent implements OnInit {
     event.stopPropagation();
     console.log("Open");
     this.actionMenuIsOpen = !this.actionMenuIsOpen
+  }
+
+  deleteUniobjectById(id: number, array: Uniobject[]): boolean {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].id === id) {
+        array.splice(i, 1);
+        return true;
+      }
+      if (array[i].items && array[i].items.length > 0) {
+        const deleted = this.deleteUniobjectById(id, array[i].items);
+        if (deleted) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 }

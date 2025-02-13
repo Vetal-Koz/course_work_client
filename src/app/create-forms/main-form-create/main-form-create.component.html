@@ -1,12 +1,13 @@
-<form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
-  <label for="classEntityName">Select Entity Type:</label>
-  <select id="classEntityName" formControlName="classEntityName" (change)="onEntityTypeChange()">
+<form class="main-form" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+  <label class="class-label" for="classEntityName">Select Entity Type:</label>
+  <select class="control" id="classEntityName" formControlName="classEntityName" (change)="onEntityTypeChange()">
     @for (type of relatedTypes; track type) {
       <option [value]="type">{{ type }}</option>
     }
   </select>
   <ng-container #classCreateForm></ng-container>
-  <button type="submit">Submit</button>
-  <br>
-  <button type="button" (click)="onCancel()">Cancel</button>
+  <div class="control-buttons">
+    <button class="save-button" type="submit">Submit</button>
+    <button class="cancel-button" type="button" (click)="onCancel()">Cancel</button>
+  </div>
 </form>

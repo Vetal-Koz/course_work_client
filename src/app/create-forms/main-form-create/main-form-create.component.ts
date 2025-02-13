@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewContainerRef,
+  ViewEncapsulation
+} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectService} from "../../services/uniobject.service";
 import {SubdivisionCreateFormComponent} from "../subdivision-create-form/subdivision-create-form.component";
@@ -21,7 +30,8 @@ import {CREATE_COMPONENTS} from "../../utils/create-component-mapping.utils";
     DepartmentCreateFormComponent
   ],
   templateUrl: './main-form-create.component.html',
-  styleUrl: './main-form-create.component.css'
+  styleUrl: './main-form-create.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class MainFormCreateComponent implements OnInit {
   mainForm: FormGroup;
