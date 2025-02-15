@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
+import {UniobjectService} from "../../services/uniobject.service";
 
 @Component({
   selector: 'app-subdivision-update-form',
@@ -14,9 +15,10 @@ import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-u
 })
 export class SubdivisionUpdateFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
+  isUpdating = false;
   subdivisionForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
     this.subdivisionForm = this.fb.group({
       chef: ['', Validators.required],
     });
@@ -26,6 +28,18 @@ export class SubdivisionUpdateFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.parentForm.addControl('chef', this.subdivisionForm.get('chef'));
+    this.uniobjectService.isUpdatingEntity$.subscribe((value) => {
+      this.isUpdating  = value;
+      this.disableInputs(this.isUpdating);
+    })
+  }
+
+  disableInputs(isUpdating: boolean) {
+    if (isUpdating) {
+      this.subdivisionForm.enable();
+    }else {
+      this.subdivisionForm.disable();
+    }
   }
 
 }

@@ -17,6 +17,8 @@ export class UniobjectService {
   uniobjects: Uniobject[] = [];
   private isUpdatedTreeSubject = new BehaviorSubject<any>(null);
   isUpdatedTree$ = this.isUpdatedTreeSubject.asObservable();
+  private isUpdatingEntity = new BehaviorSubject(false);
+  isUpdatingEntity$ = this.isUpdatingEntity.asObservable();
   private isDeletedItem = new BehaviorSubject<any>(null);
   isDeletedItem$ = this.isDeletedItem.asObservable();
 
@@ -78,6 +80,14 @@ export class UniobjectService {
 
   setUpdatedTree(value: any) {
     this.isUpdatedTreeSubject.next(value);
+  }
+
+  setUpdatingEntity(value: any) {
+    this.isUpdatingEntity.next(value);
+  }
+
+  getUpdatingEntity(): any {
+    return this.isUpdatingEntity.value;
   }
 
   setDeletedItemId(value: number) {

@@ -3,5 +3,5 @@
   <app-uniobject-update-form [parentForm]="parentForm"></app-uniobject-update-form>
 
   <label for="chef">Chef:</label>
-  <input id="chef" formControlName="chef" />
+  <input id="chef" class="control" formControlName="chef" [class.disabled-field]="!isUpdating" />
 </form>

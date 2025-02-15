@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {IsUpdating} from "../../models/is-updating.data";
+import {UniobjectService} from "../../services/uniobject.service";
 
 @Component({
   selector: 'app-uniobject-update-form',
@@ -13,8 +15,9 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 export class UniobjectUpdateFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   uniobjectForm: FormGroup;
+  isUpdating = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
     this.uniobjectForm = this.fb.group({
       name: ['', Validators.required],
     });
@@ -22,6 +25,18 @@ export class UniobjectUpdateFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.parentForm.addControl('name', this.uniobjectForm.get('name'));
+    this.uniobjectService.isUpdatingEntity$.subscribe((value) => {
+      this.isUpdating  = value;
+      this.disableInputs(this.isUpdating);
+    })
+  }
+
+  disableInputs(isUpdating: boolean) {
+    if (isUpdating) {
+      this.uniobjectForm.enable();
+    }else {
+      this.uniobjectForm.disable();
+    }
   }
 
 }

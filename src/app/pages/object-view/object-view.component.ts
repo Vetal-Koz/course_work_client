@@ -80,6 +80,9 @@ export class ObjectViewComponent implements OnInit {
     event.event.preventDefault();
     event.event.stopPropagation();
     const uniobject = event.itemData as Uniobject;
+    this.uniobjectService.isUpdated = true;
+    this.uniobjectService.updatedEntityClass = uniobject.classEntityName;
+    this.uniobjectService.entityId = uniobject.id;
     this.selectedEntityId = uniobject.id;
     this.rightClickEvent.emit({entityId: uniobject.id, className: uniobject.classEntityName});
   }

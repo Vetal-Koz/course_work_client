@@ -1,14 +1,13 @@
 import {
   Component,
-  ComponentFactoryResolver, EventEmitter,
-  Injector,
+  EventEmitter,
   Input,
   OnInit,
   Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {SubdivisionUpdateFormComponent} from "../subdivision-update-form/subdivision-update-form.component";
 import {FacultyUpdateFormComponent} from "../faculty-update-form/faculty-update-form.component";
@@ -16,6 +15,7 @@ import {NgIf, NgComponentOutlet} from "@angular/common";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DepartmentUpdateFormComponent} from "../department-update-form/department-update-form.component";
 import {UPDATE_COMPONENTS} from "../../utils/update-component-mapping.util";
+import {IsUpdating} from "../../models/is-updating.data";
 
 @Component({
   selector: 'app-main-form',
@@ -40,7 +40,7 @@ export class MainFormComponent implements OnInit {
   @Input({required: true}) selectedEntityType!: string;
   @Input({required: true}) entityId!: number;
 
-  constructor(public fb: FormBuilder, private uniobjectService: UniobjectService,) {
+  constructor(public fb: FormBuilder, protected uniobjectService: UniobjectService,) {
     this.mainForm = this.fb.group({
     });
   }
@@ -53,12 +53,14 @@ export class MainFormComponent implements OnInit {
       })
     })
     this.loadForm();
-  }
 
+    this.mainForm.enable();
+  }
 
   onCancelClick() {
     this.uniobjectService.isUpdated = false;
     this.closeDialog.emit();
+    this.uniobjectService.setUpdatingEntity(false);
   }
 
   onSubmit() {
@@ -77,6 +79,7 @@ export class MainFormComponent implements OnInit {
     this.uniobjectService.update(this.entityId, request).subscribe();
     this.uniobjectService.isUpdated = false;
     this.closeDialog.emit();
+    this.uniobjectService.setUpdatingEntity(false);
   }
 
   loadForm(): void {
@@ -86,7 +89,12 @@ export class MainFormComponent implements OnInit {
       const componentRef = this.container.createComponent(dataContainer);
       // @ts-ignore
       componentRef.instance.parentForm = this.mainForm;
+      // @ts-ignore
     }
+  }
+
+  onUpdate() {
+    this.uniobjectService.setUpdatingEntity(!this.uniobjectService.getUpdatingEntity());
   }
 
   protected readonly UPDATE_COMPONENTS = UPDATE_COMPONENTS;

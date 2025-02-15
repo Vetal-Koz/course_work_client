@@ -27,6 +27,8 @@ export class MainComponent {
       // @ts-ignore
       componentRef.instance.entityId = data.entityId;
     }
+
+    this.showUpdateDialog();
   }
 
   showUpdateDialog(): void {

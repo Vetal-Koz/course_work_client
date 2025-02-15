@@ -3,8 +3,8 @@
   <app-subdivision-update-form [parentForm]="parentForm"></app-subdivision-update-form>
 
   <label for="curricula">Curricula:</label>
-  <input id="curricula" formControlName="curricula" />
+  <input id="curricula" class="control" formControlName="curricula" [class.disabled-field]="!isUpdating" />
 
   <label for="facultyLocation">Faculty Location:</label>
-  <input id="facultyLocation" formControlName="facultyLocation" />
+  <input id="facultyLocation" class="control" formControlName="facultyLocation" [class.disabled-field]="!isUpdating"/>
 </form>

@@ -1,10 +1,10 @@
-<form [formGroup]="facultyForm">
+<form [formGroup]="departmentForm">
   <!-- Вставка форми SubdivisionEntity як вкладеної -->
   <app-subdivision-update-form [parentForm]="parentForm"></app-subdivision-update-form>
 
   <label for="teachingFocus">Teaching Focus:</label>
-  <input id="teachingFocus" formControlName="teachingFocus" />
+  <input id="teachingFocus" class="control" formControlName="teachingFocus" [class.disabled-field]="!isUpdating"/>
 
   <label for="budget">Budget:</label>
-  <input id="budget" type="number" formControlName="budget" />
+  <input id="budget" type="number" class="control" formControlName="budget" [class.disabled-field]="!isUpdating"/>
 </form>

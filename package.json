@@ -1,12 +1,15 @@
 {
   "name": "course-work-client",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href ./",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron": "electron .",
+    "package": "electron-packager . MyApp --platform=win32 --arch=x64 --out=dist-electron --overwrite"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +27,7 @@
     "devextreme": "24.1.4",
     "devextreme-angular": "24.1.4",
     "devextreme-schematics": "^1.7.1",
+    "electron": "^34.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
