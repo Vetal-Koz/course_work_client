@@ -20,13 +20,13 @@ export class MainComponent {
   constructor(protected uniobjectService: UniobjectService) {}
 
   loadForm(data: {entityId: number, className: string}): void {
-    const dataContainer = FORM_COMPONENTS[data.className];
-    if (dataContainer) {
-      this.dataContainer.clear();
-      const componentRef = this.dataContainer.createComponent(dataContainer);
-      // @ts-ignore
-      componentRef.instance.entityId = data.entityId;
-    }
+    // const dataContainer = FORM_COMPONENTS[data.className];
+    // if (dataContainer) {
+    //   this.dataContainer.clear();
+    //   const componentRef = this.dataContainer.createComponent(dataContainer);
+    //   // @ts-ignore
+    //   componentRef.instance.entityId = data.entityId;
+    // }
 
     this.showUpdateDialog();
   }

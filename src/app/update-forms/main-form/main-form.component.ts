@@ -15,7 +15,6 @@ import {NgIf, NgComponentOutlet} from "@angular/common";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DepartmentUpdateFormComponent} from "../department-update-form/department-update-form.component";
 import {UPDATE_COMPONENTS} from "../../utils/update-component-mapping.util";
-import {IsUpdating} from "../../models/is-updating.data";
 
 @Component({
   selector: 'app-main-form',
@@ -49,6 +48,7 @@ export class MainFormComponent implements OnInit {
     this.uniobjectService.findById(this.entityId).subscribe({
       next: (res => {
         this.mainForm.patchValue(res);
+        console.log(res);
         this.major = res.major;
       })
     })
