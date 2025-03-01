@@ -1,27 +1,60 @@
-# CourseWorkClient
+# Angular Electron App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+## 🚀 About the Project
 
-## Development server
+This application demonstrates how to apply **Object-Oriented Programming (OOP) principles** in a **Relational Database** environment. Built using **Angular** and **Electron**, the app provides a seamless desktop experience while maintaining the structure and robustness of relational data management.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🛠️ Features
 
-## Code scaffolding
+- **Object-Oriented Data Mapping** – Encapsulate relational database entities using an OOP approach.
+- **Electron Integration** – Run your Angular app as a cross-platform desktop application.
+- **Relational Database Support** – Interact with structured data efficiently.
+- **Modern UI** – Clean and intuitive user interface powered by Angular.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 📦 Installation & Setup
 
-## Build
+Follow these steps to set up and run the application:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 1️⃣ Install Dependencies
 
-## Running unit tests
+Run the following command to install required packages:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```sh
+npm install
+```
 
-## Running end-to-end tests
+### 2️⃣ Build the Angular Project
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Generate the production build with:
 
-## Further help
+```sh
+ng build --base-href ./
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 3️⃣ Start the Electron App
+
+Launch the application using:
+
+```sh
+npm run electron
+```
+
+## 🖥️ Technologies Used
+
+- **Angular** – Frontend framework for dynamic UI
+- **Electron** – Cross-platform desktop application framework
+- **TypeScript** – Strongly-typed JavaScript for scalable development
+- **Relational Database** – Efficient data storage and retrieval
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to fork the repository and submit a pull request.
+
+---
+
+🚀 **Enjoy coding with Object-Oriented Relational Databases!** 🎯
+
