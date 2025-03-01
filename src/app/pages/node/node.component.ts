@@ -16,6 +16,7 @@ import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 export class NodeComponent {
   actionMenuIsOpen = false;
   @Input() entity!: {id: number, name: string, className: string};
+  @Input() isSelecting?: boolean;
   @Output() onUpdateClick = new EventEmitter();
   @Output() onCreateClick = new EventEmitter();
 

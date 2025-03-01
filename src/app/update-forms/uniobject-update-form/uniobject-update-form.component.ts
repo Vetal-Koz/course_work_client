@@ -2,18 +2,21 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {IsUpdating} from "../../models/is-updating.data";
 import {UniobjectService} from "../../services/uniobject.service";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-uniobject-update-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass
   ],
   templateUrl: './uniobject-update-form.component.html',
   styleUrl: './uniobject-update-form.component.css'
 })
 export class UniobjectUpdateFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
+  @Input() parentClass = "";
   uniobjectForm: FormGroup;
   isUpdating = false;
 

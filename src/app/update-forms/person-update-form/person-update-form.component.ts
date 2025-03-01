@@ -2,19 +2,22 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {UniobjectService} from "../../services/uniobject.service";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-person-update-form',
   standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        UniobjectUpdateFormComponent
-    ],
+  imports: [
+    ReactiveFormsModule,
+    UniobjectUpdateFormComponent,
+    NgClass
+  ],
   templateUrl: './person-update-form.component.html',
   styleUrl: './person-update-form.component.css'
 })
 export class PersonUpdateFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
+  @Input() parentClass = "";
   isUpdating = false;
   personForm: FormGroup;
 
@@ -36,6 +39,7 @@ export class PersonUpdateFormComponent implements OnInit {
       this.isUpdating  = value;
       this.disableInputs(this.isUpdating);
     })
+
   }
 
   disableInputs(isUpdating: boolean) {

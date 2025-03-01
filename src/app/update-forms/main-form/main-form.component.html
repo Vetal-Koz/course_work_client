@@ -6,12 +6,13 @@
 
   @if(uniobjectService.getUpdatingEntity()) {
     <div class="control-buttons">
-      <button class="save-button" type="submit">Submit</button>
-      <button class="cancel-button" (click)="onCancelClick()" type="button">Cancel</button>
+      <button class="save-button" type="submit">Зберегти</button>
+      <button class="cancel-button" (click)="onCancelClick()" type="button">Відмінити</button>
     </div>
   } @else {
     <div class="control-buttons">
-      <button class="save-button" type="button" (click)="onCancelClick()">Close</button>
+      <button class="save-button" type="button" (click)="onCancelClick()">Закрити</button>
     </div>
   }
+
 </form>

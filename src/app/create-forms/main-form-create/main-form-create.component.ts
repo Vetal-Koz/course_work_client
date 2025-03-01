@@ -100,7 +100,6 @@ export class MainFormCreateComponent implements OnInit {
     }
     console.log(request);
 
-    let response = null;
     this.uniobjectService.create(request).subscribe({
         next: ((res) => {
           this.addValueToUniobjects(res);

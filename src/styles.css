@@ -67,3 +67,29 @@ input.control {
   padding-bottom: 1px;
 }
 
+.chef-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.change-img{
+  height: 20px;
+  cursor: pointer;
+}
+
+.student-info{
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-img {
+  align-items: end;
+}
+
+.student-photo {
+  width: 150px;
+}
+
+

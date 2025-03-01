@@ -9,5 +9,6 @@ export const UPDATE_COMPONENTS: { [key: string]: any } = {
   Department: DepartmentUpdateFormComponent,
   Faculty: FacultyUpdateFormComponent,
   Person: PersonUpdateFormComponent,
-  Student: StudentUpdateFormComponent
+  Student: StudentUpdateFormComponent,
+  Folder: UniobjectUpdateFormComponent
 }

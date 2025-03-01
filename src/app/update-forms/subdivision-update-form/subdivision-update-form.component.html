@@ -1,7 +1,18 @@
 <form [formGroup]="subdivisionForm">
-  <!-- Вставка форми UniobjectEntity як вкладеної -->
   <app-uniobject-update-form [parentForm]="parentForm"></app-uniobject-update-form>
 
-  <label for="chef">Chef:</label>
-  <input id="chef" class="control" formControlName="chef" [class.disabled-field]="!isUpdating" />
+  <label for="chef">Керуючий:</label>
+  <div class="chef-info">
+    <input id="chef" class="control" formControlName="chef" [class.disabled-field]="true" />
+    @if (isUpdating) {
+      <span type="button" (click)="onChangeClick()">
+        <img class="change-img" src="change.png" alt="change-chef" />
+      </span>
+    }
+  </div>
+
+  <dialog #selectChefDialog id="selectChefDialog">
+    <app-select-object-view (selectedItem)="updateChef($event)" selectedClass="Person"/>
+    <button (click)="onClose()" class="btn btn-danger" type="button">Закрити</button>
+  </dialog>
 </form>

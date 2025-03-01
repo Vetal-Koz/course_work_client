@@ -9,5 +9,6 @@ export const CREATE_COMPONENTS: { [key: string]: any } = {
   Person: PersonCreateFormComponent,
   Student: StudentCreateFormComponent,
   Department: DepartmentCreateFormComponent,
-  Faculty: FacultyCreateFormComponent
+  Faculty: FacultyCreateFormComponent,
+  Folder: UniobjectCreateFormComponent
 }

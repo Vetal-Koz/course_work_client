@@ -1,12 +1,21 @@
-<form [formGroup]="studentForm">
-  <app-person-update-form [parentForm]="parentForm"></app-person-update-form>
+<h1>Особовий Листок з Обліку Кадрів</h1>
+<form [ngClass]="parentClass" [formGroup]="studentForm">
 
-  <label for="averageMark">Average Mark:</label>
-  <input id="averageMark" type="number" class="control" formControlName="averageMark" [class.disabled-field]="!isUpdating" step="0.1" min="0" max="100" />
+  <div class="student-description">
 
-  <label for="universityGroup">University Group:</label>
-  <input id="universityGroup" type="text" class="control" formControlName="universityGroup" [class.disabled-field]="!isUpdating" />
+    <app-person-update-form [parentForm]="parentForm" />
 
-  <label for="practicalExperience">Practical Experience (Years):</label>
-  <input id="practicalExperience" type="number" class="control" formControlName="practicalExperience" [class.disabled-field]="!isUpdating" min="0" />
+    <label for="averageMark">Середній бал:</label>
+    <input id="averageMark" type="number" class="control" formControlName="averageMark" [class.disabled-field]="!isUpdating" step="0.1" min="0" max="100" />
+
+    <label for="universityGroup">Група:</label>
+    <input id="universityGroup" type="text" class="control" formControlName="universityGroup" [class.disabled-field]="!isUpdating" />
+
+    <label for="practicalExperience">Практичний досвід (роки):</label>
+    <input id="practicalExperience" type="number" class="control" formControlName="practicalExperience" [class.disabled-field]="!isUpdating" min="0" />
+  </div>
+
+  <div class="user-img">
+    <img class="student-photo" src="man.jpg" alt="user photo">
+  </div>
 </form>

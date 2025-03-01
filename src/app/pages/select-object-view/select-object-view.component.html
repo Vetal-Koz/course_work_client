@@ -1,0 +1,33 @@
+<div class="form">
+  <div class="drive-panel">
+    <dx-sortable
+      filter=".dx-treeview-item"
+      group="shared"
+      data="driveC"
+      [allowDropInsideItem]="false"
+      [allowReordering]="false"
+    >
+      <dx-tree-view class="tree-data"
+                    #university
+                    id="university"
+                    dataStructure="tree"
+                    displayExpr="name"
+                    [expandNodesRecursive]="false"
+                    [dataSource]="uniobjectsForTree"
+                    (onItemClick)="onItemClick($event)"
+                    [width]="250"
+                    [height]="380"
+                    itemTemplate="node-list"
+      >
+        <div *dxTemplate="let node of 'node-list'">
+          <app-node [isSelecting]="true"
+                    [entity]="{ id: node.id, name: node.name, className: node.classEntityName }">
+            @if (node.classEntityName === selectedClass) {
+              <button (click)="onSelectItem(node)" type="button" class="btn btn-warning">Вибрати</button>
+            }
+          </app-node>
+        </div>
+      </dx-tree-view>
+    </dx-sortable>
+  </div>
+</div>

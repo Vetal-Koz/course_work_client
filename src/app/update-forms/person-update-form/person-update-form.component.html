@@ -1,17 +1,17 @@
-<form [formGroup]="personForm">
-  <app-uniobject-update-form [parentForm]="parentForm"></app-uniobject-update-form>
+<form [ngClass]="parentClass" [formGroup]="personForm">
+  <app-uniobject-update-form [parentClass]="parentClass" [parentForm]="parentForm"></app-uniobject-update-form>
 
-  <label for="dateOfBirth">Date of Birth:</label>
+  <label for="dateOfBirth">Дата народження:</label>
   <input id="dateOfBirth" type="date" class="control" formControlName="dateOfBirth" [class.disabled-field]="!isUpdating" />
 
-  <label for="sex">Sex:</label>
+  <label for="sex">Стать:</label>
   <select id="sex" class="control" formControlName="sex" [class.disabled-field]="!isUpdating">
     <option value="" disabled selected>Select...</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
+    <option value="Чол.">Чол.</option>
+    <option value="Жін.">Жін.</option>
+    <option value="Інше">Інше</option>
   </select>
 
-  <label for="nationality">Nationality:</label>
+  <label for="nationality">Національність:</label>
   <input id="nationality" type="text" class="control" formControlName="nationality" [class.disabled-field]="!isUpdating" />
 </form>

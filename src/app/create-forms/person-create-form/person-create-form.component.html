@@ -2,17 +2,17 @@
   <!-- Вставка форми SubdivisionEntity як вкладеної -->
   <app-uniobject-create-form [parentForm]="parentForm"></app-uniobject-create-form>
 
-  <label class="control" for="dateOfBirth">Date of Birth:</label>
+  <label class="control" for="dateOfBirth">Дата народження:</label>
   <input class="control" id="dateOfBirth" formControlName="dateOfBirth" type="date" />
 
-  <label class="control" for="sex">Sex:</label>
+  <label class="control" for="sex">Стать:</label>
   <select class="control" id="sex" formControlName="sex">
     <option value="" disabled selected>Select...</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other</option>
+    <option value="Чол.">Чол.</option>
+    <option value="Жін.">Жін.</option>
+    <option value="Інше">Інше</option>
   </select>
 
-  <label class="control" for="nationality">Nationality:</label>
+  <label class="control" for="nationality">Національність:</label>
   <input class="control" id="nationality" formControlName="nationality" />
 </form>

@@ -4,11 +4,12 @@ import {ObjectViewComponent} from "../object-view/object-view.component";
 import {UniobjectService} from "../../services/uniobject.service";
 import {MainFormComponent} from "../../update-forms/main-form/main-form.component";
 import {MainFormCreateComponent} from "../../create-forms/main-form-create/main-form-create.component";
+import {SelectObjectViewComponent} from "../select-object-view/select-object-view.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ObjectViewComponent, MainFormComponent, MainFormCreateComponent],
+  imports: [ObjectViewComponent, MainFormComponent, MainFormCreateComponent, SelectObjectViewComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

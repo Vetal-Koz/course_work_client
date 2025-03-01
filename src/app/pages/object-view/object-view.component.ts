@@ -62,6 +62,7 @@ export class ObjectViewComponent implements OnInit {
         if (value.major == 0) {
           this.uniobjectsForTree.push(value);
         }
+        this.universityComponent.instance.option('dataSource', this.uniobjectsForTree);
       }
     })
 

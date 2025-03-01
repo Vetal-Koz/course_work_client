@@ -1,4 +1,5 @@
-<form [formGroup]="uniobjectForm">
-  <label for="name">Name:</label>
+<form [ngClass]="parentClass" [formGroup]="uniobjectForm">
+  <label for="name">Ім'я:</label>
   <input id="name" class="control" formControlName="name" [class.disabled-field]="!isUpdating"/>
 </form>
+

@@ -7,8 +7,13 @@
     [class.open]="actionMenuIsOpen"
     (click)="actionMenuIsOpen = !actionMenuIsOpen"
   >
-    <img class="menu-img" src="dots-menu.png" alt="menu-dots"/>
+    @if (!isSelecting) {
+      <img class="menu-img" src="dots-menu.png" alt="menu-dots"/>
+    }
   </button>
+  <ng-content>
+
+  </ng-content>
   <ng-template
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"

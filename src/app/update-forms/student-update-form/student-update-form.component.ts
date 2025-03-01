@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {UniobjectService} from "../../services/uniobject.service";
 import {PersonUpdateFormComponent} from "../person-update-form/person-update-form.component";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-student-update-form',
@@ -11,12 +12,14 @@ import {PersonUpdateFormComponent} from "../person-update-form/person-update-for
     ReactiveFormsModule,
     UniobjectUpdateFormComponent,
     PersonUpdateFormComponent,
+    NgClass,
   ],
   templateUrl: './student-update-form.component.html',
   styleUrl: './student-update-form.component.css'
 })
 export class StudentUpdateFormComponent implements OnInit {
   @Input() parentForm!: FormGroup;
+  @Input() parentClass = 'student-info';
   isUpdating = false;
   studentForm: FormGroup;
 

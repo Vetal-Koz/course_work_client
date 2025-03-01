@@ -27,3 +27,7 @@ button:hover {
   background-color: rgba(0, 110, 248, 0.4);
 }
 
+.btn {
+  width: 20px;
+}
+

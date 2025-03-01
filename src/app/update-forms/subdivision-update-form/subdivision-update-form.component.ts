@@ -1,29 +1,31 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {UniobjectService} from "../../services/uniobject.service";
+import {SelectObjectViewComponent} from "../../pages/select-object-view/select-object-view.component";
 
 @Component({
   selector: 'app-subdivision-update-form',
   standalone: true,
   imports: [
     UniobjectUpdateFormComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectObjectViewComponent
   ],
   templateUrl: './subdivision-update-form.component.html',
   styleUrl: './subdivision-update-form.component.css'
 })
 export class SubdivisionUpdateFormComponent implements OnInit {
+  @ViewChild("selectChefDialog")  selectChefDialog!: ElementRef<HTMLDialogElement>;
   @Input() parentForm!: FormGroup;
   isUpdating = false;
   subdivisionForm: FormGroup;
 
   constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
     this.subdivisionForm = this.fb.group({
-      chef: ['', Validators.required],
+      chef: [null, Validators.required],
     });
 
-    // Додаємо форму до батьківської
   }
 
   ngOnInit(): void {
@@ -42,4 +44,22 @@ export class SubdivisionUpdateFormComponent implements OnInit {
     }
   }
 
+  updateChef(chef: any) {
+    console.log(chef);
+    this.subdivisionForm.setValue({
+      chef: chef.name
+    });
+    this.parentForm.addControl('chefId', new FormControl(chef.id));
+    console.log(this.parentForm.value);
+
+    this.selectChefDialog.nativeElement.close()
+  }
+
+  onChangeClick() {
+    this.selectChefDialog.nativeElement.showModal();
+  }
+
+  onClose() {
+    this.selectChefDialog.nativeElement.close();
+  }
 }
