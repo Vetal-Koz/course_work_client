@@ -22,8 +22,14 @@
         <div *dxTemplate="let node of 'node-list'">
           <app-node [isSelecting]="true"
                     [entity]="{ id: node.id, name: node.name, className: node.classEntityName }">
+
             @if (node.classEntityName === selectedClass) {
-              <button (click)="onSelectItem(node)" type="button" class="btn btn-warning">Вибрати</button>
+              <input type="radio"
+                     name="itemSelection"
+                [value]="node.id"
+                [(ngModel)]="selectedObjectId"
+                (click)="onSelectItem(node)"
+              />
             }
           </app-node>
         </div>

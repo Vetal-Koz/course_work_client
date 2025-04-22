@@ -14,21 +14,12 @@ import {SelectObjectViewComponent} from "../select-object-view/select-object-vie
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  @ViewChild('dataContainer', {read: ViewContainerRef, static: true})  dataContainer!: ViewContainerRef;
   @ViewChild("updateDialog")  updateDialog!: ElementRef<HTMLDialogElement>;
   @ViewChild("createDialog") createDialog!: ElementRef<HTMLDialogElement>;
 
   constructor(protected uniobjectService: UniobjectService) {}
 
   loadForm(data: {entityId: number, className: string}): void {
-    // const dataContainer = FORM_COMPONENTS[data.className];
-    // if (dataContainer) {
-    //   this.dataContainer.clear();
-    //   const componentRef = this.dataContainer.createComponent(dataContainer);
-    //   // @ts-ignore
-    //   componentRef.instance.entityId = data.entityId;
-    // }
-
     this.showUpdateDialog();
   }
 
@@ -47,5 +38,7 @@ export class MainComponent {
   closeCreateDialog() {
     this.createDialog.nativeElement.close();
   }
+
+
 
 }

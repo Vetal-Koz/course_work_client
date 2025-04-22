@@ -1,11 +1,11 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {DxSortableModule, DxTemplateModule, DxTreeViewComponent, DxTreeViewModule} from "devextreme-angular";
 import {NodeComponent} from "../node/node.component";
 import {Uniobject} from "../../models/uniobject.data";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DxSortableTypes} from "devextreme-angular/ui/sortable";
 import {DxTreeViewTypes} from "devextreme-angular/ui/tree-view";
-import {Subscription} from "rxjs";
+import {BehaviorSubject, Subscription} from "rxjs";
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 import {ActionPopoverComponent} from "../../dialogs/action-popover/action-popover.component";
 
@@ -29,9 +29,10 @@ type Item = DxTreeViewTypes.Item;
   templateUrl: './object-view.component.html',
   styleUrl: './object-view.component.css'
 })
-export class ObjectViewComponent implements OnInit {
+export class ObjectViewComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   @ViewChild('university') universityComponent: DxTreeViewComponent;
+  @ViewChild("wrapper") wrapperComponent!: ElementRef;
   @Output() rightClickEvent =
     new EventEmitter<
       {
@@ -47,9 +48,23 @@ export class ObjectViewComponent implements OnInit {
   mainObject? : Uniobject;
   private createItemSub!: Subscription;
   private deleteItemSub!: Subscription;
+  private resizeObserver!: ResizeObserver;
 
 
   constructor(private uniobjectService: UniobjectService) {
+  }
+
+
+  ngAfterViewInit(): void {
+    this.resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        this.universityComponent.height = height;
+        this.universityComponent.width = width;
+      }
+    });
+
+    this.resizeObserver.observe(this.wrapperComponent.nativeElement);
   }
 
   ngOnInit(): void {
@@ -209,7 +224,7 @@ export class ObjectViewComponent implements OnInit {
         const fromObj = this.uniobjects.find((obj) => obj.id == fromNode.itemData?.id)
         if (fromObj !== undefined) {
           fromObj.major = Number(toNode.itemData?.id);
-          // this.uniobjectService.updateMajor(fromObj.id, fromObj.major).subscribe();
+          this.uniobjectService.updateMajor(fromObj.id, fromObj.major).subscribe();
         }
       }
       // @ts-ignore

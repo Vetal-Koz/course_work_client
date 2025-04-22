@@ -4,7 +4,9 @@ import {
   SubdivisionUpdateFormComponent
 } from "../../update-forms/subdivision-update-form/subdivision-update-form.component";
 import {SubdivisionCreateFormComponent} from "../subdivision-create-form/subdivision-create-form.component";
+import {RegisterCreateComponent} from "../../decorators/register-create-component-decorator";
 
+@RegisterCreateComponent("DepartmentForm")
 @Component({
   selector: 'app-department-create-form',
   standalone: true,

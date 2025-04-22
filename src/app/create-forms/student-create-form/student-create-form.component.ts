@@ -2,7 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectCreateFormComponent} from "../uniobject-create-form/uniobject-create-form.component";
 import {PersonCreateFormComponent} from "../person-create-form/person-create-form.component";
+import {RegisterCreateComponent} from "../../decorators/register-create-component-decorator";
 
+
+@RegisterCreateComponent("StudentForm")
 @Component({
   selector: 'app-student-create-form',
   standalone: true,

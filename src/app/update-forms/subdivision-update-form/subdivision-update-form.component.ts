@@ -1,9 +1,12 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {UniobjectService} from "../../services/uniobject.service";
 import {SelectObjectViewComponent} from "../../pages/select-object-view/select-object-view.component";
+import {RegisterUpdateComponent} from "../../decorators/register-update-component-decorator";
 
+
+@RegisterUpdateComponent('SubdivisionForm')
 @Component({
   selector: 'app-subdivision-update-form',
   standalone: true,
@@ -24,12 +27,14 @@ export class SubdivisionUpdateFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
     this.subdivisionForm = this.fb.group({
       chef: [null, Validators.required],
+      chefId: [null]
     });
 
   }
 
   ngOnInit(): void {
     this.parentForm.addControl('chef', this.subdivisionForm.get('chef'));
+    this.parentForm.addControl('chefId', this.subdivisionForm.get('chefId'));
     this.uniobjectService.isUpdatingEntity$.subscribe((value) => {
       this.isUpdating  = value;
       this.disableInputs(this.isUpdating);
@@ -45,11 +50,10 @@ export class SubdivisionUpdateFormComponent implements OnInit {
   }
 
   updateChef(chef: any) {
-    console.log(chef);
-    this.subdivisionForm.setValue({
-      chef: chef.name
-    });
-    this.parentForm.addControl('chefId', new FormControl(chef.id));
+    this.parentForm.get('chef')?.setValue(chef.name);
+    this.parentForm.get('chefId')?.setValue(chef.id);
+
+    console.log(this.subdivisionForm);
     console.log(this.parentForm.value);
 
     this.selectChefDialog.nativeElement.close()

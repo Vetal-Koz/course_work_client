@@ -1,7 +1,7 @@
 <form [formGroup]="subdivisionForm">
   <app-uniobject-update-form [parentForm]="parentForm"></app-uniobject-update-form>
 
-  <label for="chef">Керуючий:</label>
+  <label for="chef">Голова:</label>
   <div class="chef-info">
     <input id="chef" class="control" formControlName="chef" [class.disabled-field]="true" />
     @if (isUpdating) {
@@ -12,7 +12,10 @@
   </div>
 
   <dialog #selectChefDialog id="selectChefDialog">
-    <app-select-object-view (selectedItem)="updateChef($event)" selectedClass="Person"/>
+    <app-select-object-view
+      [selectedObjectId]="parentForm.get('chefId')"
+      (selectedItem)="updateChef($event)"
+      selectedClass="Person"/>
     <button (click)="onClose()" class="btn btn-danger" type="button">Закрити</button>
   </dialog>
 </form>

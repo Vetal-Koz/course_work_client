@@ -38,25 +38,27 @@
       (onDragChange)="onDragChange($event)"
       (onDragEnd)="onDragEnd($event)"
     >
-      <dx-tree-view class="tree-data"
-                    #university
-                    id="university"
-                    dataStructure="tree"
-                    displayExpr="name"
-                    [expandNodesRecursive]="false"
-                    [dataSource]="uniobjectsForTree"
-                    (onItemClick)="onItemClick($event)"
-                    (onItemContextMenu)="onHandleRightClick($event)"
-                    [width]="250"
-                    [height]="380"
-                    itemTemplate="node-list"
-      >
-        <div *dxTemplate="let node of 'node-list'">
-          <app-node (onCreateClick)="onCreate()" (onUpdateClick)="onUpdate()"
-                    [entity]="{ id: node.id, name: node.name, className: node.classEntityName }">
-          </app-node>
-        </div>
-      </dx-tree-view>
+      <div id="wrapper" #wrapper class="resizable-container" style="resize: both; overflow: auto;">
+        <dx-tree-view class="tree-data"
+                      #university
+                      id="university"
+                      dataStructure="tree"
+                      displayExpr="name"
+                      [expandNodesRecursive]="false"
+                      [dataSource]="uniobjectsForTree"
+                      (onItemClick)="onItemClick($event)"
+                      (onItemContextMenu)="onHandleRightClick($event)"
+                      [width]="250"
+                      [height]="380"
+                      itemTemplate="node-list"
+        >
+          <div *dxTemplate="let node of 'node-list'">
+            <app-node (onCreateClick)="onCreate()" (onUpdateClick)="onUpdate()"
+                      [entity]="{ id: node.id, name: node.name, className: node.classEntityName }">
+            </app-node>
+          </div>
+        </dx-tree-view>
+      </div>
     </dx-sortable>
   </div>
 </div>

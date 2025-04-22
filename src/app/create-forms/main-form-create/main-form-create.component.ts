@@ -17,6 +17,7 @@ import {NgIf} from "@angular/common";
 import {DepartmentCreateFormComponent} from "../department-create-form/department-create-form.component";
 import {Uniobject} from "../../models/uniobject.data";
 import {CREATE_COMPONENTS} from "../../utils/create-component-mapping.utils";
+import {CreateComponentRegisterService} from "../../services/create-component-register";
 
 @Component({
   selector: 'app-main-form-create',
@@ -42,7 +43,7 @@ export class MainFormCreateComponent implements OnInit {
   @ViewChild('classCreateForm', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
 
 
-  constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
+  constructor(private fb: FormBuilder, private uniobjectService: UniobjectService, private registerService: CreateComponentRegisterService) {
     this.mainForm = this.fb.group({
       classEntityName: ['', Validators.required],
     });
@@ -60,19 +61,23 @@ export class MainFormCreateComponent implements OnInit {
     }
 
     this.mainForm.get('classEntityName')?.valueChanges.subscribe((newValue) => {
+      this.selectedEntityType = newValue;
       this.loadForm(newValue);
     });
   }
 
-  loadForm(className: string): void {
-    const dataContainer = CREATE_COMPONENTS[className];
+  async loadForm(className: string): Promise<void> {
+    console.log(this.selectedEntityType);
+    const response = await fetch("http://localhost:8080/api/uniobjects/classes/" + className)
+    const data = await response.json();
+    const dataContainer = this.registerService.getComponent(data.form);
+    console.log(dataContainer);
     if (dataContainer) {
       this.container.clear();
       const componentRef = this.container.createComponent(dataContainer);
       // @ts-ignore
       componentRef.instance.parentForm = this.mainForm;
-    }else {
-      this.container.clear();
+      // @ts-ignore
     }
   }
 

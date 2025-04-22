@@ -1,11 +1,9 @@
 <div class="body">
   <app-object-view (onCreateClick)="showCreateDialog()"
                    (onUpdateClick)="showUpdateDialog()"
-                   (rightClickEvent)="loadForm($event)"/>
+                   (rightClickEvent)="loadForm($event)"
+  />
 
-  <div class="info">
-    <ng-container #dataContainer></ng-container>
-  </div>
   <dialog #updateDialog>
     @if (this.uniobjectService.isUpdated) {
       <app-main-form (closeDialog)="closeUpdateDialog()"

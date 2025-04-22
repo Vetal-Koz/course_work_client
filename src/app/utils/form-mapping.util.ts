@@ -9,3 +9,4 @@ export const FORM_COMPONENTS: { [key: string]: any } = {
   Department: DepartmentComponent,
   Faculty: FacultyComponent
 }
+

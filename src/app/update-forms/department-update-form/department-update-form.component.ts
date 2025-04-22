@@ -3,7 +3,10 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {SubdivisionUpdateFormComponent} from "../subdivision-update-form/subdivision-update-form.component";
 import {IsUpdating} from "../../models/is-updating.data";
 import {UniobjectService} from "../../services/uniobject.service";
+import {RegisterUpdateComponent} from "../../decorators/register-update-component-decorator";
 
+
+@RegisterUpdateComponent("DepartmentForm")
 @Component({
   selector: 'app-department-update-form',
   standalone: true,

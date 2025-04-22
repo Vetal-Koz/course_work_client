@@ -3,7 +3,10 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-update-form.component";
 import {UniobjectService} from "../../services/uniobject.service";
 import {NgClass} from "@angular/common";
+import {RegisterUpdateComponent} from "../../decorators/register-update-component-decorator";
 
+
+@RegisterUpdateComponent("PersonForm")
 @Component({
   selector: 'app-person-update-form',
   standalone: true,

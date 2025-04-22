@@ -4,7 +4,10 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
 import {UniobjectUpdateFormComponent} from "../../update-forms/uniobject-update-form/uniobject-update-form.component";
 import {UniobjectCreateFormComponent} from "../uniobject-create-form/uniobject-create-form.component";
 import {SelectObjectViewComponent} from "../../pages/select-object-view/select-object-view.component";
+import {RegisterCreateComponent} from "../../decorators/register-create-component-decorator";
 
+
+@RegisterCreateComponent("SubdivisionForm")
 @Component({
   selector: 'app-subdivision-create-form',
   standalone: true,

@@ -15,6 +15,7 @@ import {NgIf, NgComponentOutlet} from "@angular/common";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DepartmentUpdateFormComponent} from "../department-update-form/department-update-form.component";
 import {UPDATE_COMPONENTS} from "../../utils/update-component-mapping.util";
+import {UpdateComponentRegisterService} from "../../services/update-component-register.service";
 
 @Component({
   selector: 'app-main-form',
@@ -39,7 +40,9 @@ export class MainFormComponent implements OnInit {
   @Input({required: true}) selectedEntityType!: string;
   @Input({required: true}) entityId!: number;
 
-  constructor(public fb: FormBuilder, protected uniobjectService: UniobjectService,) {
+  constructor(public fb: FormBuilder,
+              protected uniobjectService: UniobjectService,
+              private registerService: UpdateComponentRegisterService,) {
     this.mainForm = this.fb.group({
     });
   }
@@ -82,8 +85,11 @@ export class MainFormComponent implements OnInit {
     this.uniobjectService.setUpdatingEntity(false);
   }
 
-  loadForm(): void {
-    const dataContainer = UPDATE_COMPONENTS[this.selectedEntityType];
+  async loadForm(): Promise<void> {
+    const response = await fetch("http://localhost:8080/api/uniobjects/classes/" + this.selectedEntityType)
+    const data = await response.json();
+    const dataContainer = this.registerService.getComponent(data.form);
+    console.log(this.registerService.registry);
     if (dataContainer) {
       this.container.clear();
       const componentRef = this.container.createComponent(dataContainer);

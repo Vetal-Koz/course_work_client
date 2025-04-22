@@ -4,7 +4,10 @@ import {UniobjectUpdateFormComponent} from "../uniobject-update-form/uniobject-u
 import {UniobjectService} from "../../services/uniobject.service";
 import {PersonUpdateFormComponent} from "../person-update-form/person-update-form.component";
 import {NgClass} from "@angular/common";
+import {RegisterUpdateComponent} from "../../decorators/register-update-component-decorator";
 
+
+@RegisterUpdateComponent("StudentForm")
 @Component({
   selector: 'app-student-update-form',
   standalone: true,

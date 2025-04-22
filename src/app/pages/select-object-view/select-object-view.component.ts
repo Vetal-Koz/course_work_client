@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ObjectViewComponent} from "../object-view/object-view.component";
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 import {DxSortableModule, DxTreeViewComponent, DxTreeViewModule} from "devextreme-angular";
 import {ActionPopoverComponent} from "../../dialogs/action-popover/action-popover.component";
 import {NodeComponent} from "../node/node.component";
 import {Uniobject} from "../../models/uniobject.data";
 import {UniobjectService} from "../../services/uniobject.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-select-object-view',
@@ -16,7 +16,8 @@ import {UniobjectService} from "../../services/uniobject.service";
     ActionPopoverComponent,
     DxTreeViewModule,
     NodeComponent,
-    CdkOverlayOrigin
+    CdkOverlayOrigin,
+    FormsModule
   ],
   templateUrl: './select-object-view.component.html',
   styleUrl: './select-object-view.component.css'
@@ -24,6 +25,7 @@ import {UniobjectService} from "../../services/uniobject.service";
 export class SelectObjectViewComponent implements OnInit {
   @ViewChild('university') universityComponent!: DxTreeViewComponent;
   @Input({required: true}) selectedClass!: string;
+  @Input() selectedObjectId? : any;
   @Output() selectedItem = new EventEmitter<any>();
   uniobjectsForTree: Uniobject[] = [];
   uniobjects: Uniobject[] = [];
@@ -35,7 +37,10 @@ export class SelectObjectViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.uniobjectService.findAllWhereMajorIsNull().subscribe(res => {
+    this.selectedObjectId?.valueChanges?.subscribe((value: any) => {
+      this.selectedObjectId = value;
+    });
+      this.uniobjectService.findAllWhereMajorIsNull().subscribe(res => {
       this.uniobjects.push(...res);
       this.uniobjectsForTree.push(...res);
     });
