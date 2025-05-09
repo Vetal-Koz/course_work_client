@@ -19,6 +19,7 @@ export class NodeComponent {
   @Input() isSelecting?: boolean;
   @Output() onUpdateClick = new EventEmitter();
   @Output() onCreateClick = new EventEmitter();
+  @Output() onMethodClick = new EventEmitter();
 
 
 
@@ -28,5 +29,10 @@ export class NodeComponent {
 
   onCreate() {
     this.onCreateClick.emit();
+  }
+
+  handleMethodClick(methodForm: string) {
+    console.log(methodForm);
+    this.onMethodClick.emit(methodForm);
   }
 }

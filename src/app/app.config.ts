@@ -7,6 +7,9 @@ import {UpdateComponentRegisterService} from "./services/update-component-regist
 import {getPendingRegistrations} from "./decorators/register-update-component-decorator";
 import {CreateComponentRegisterService} from "./services/create-component-register";
 import {getPendingCreateRegistrations} from "./decorators/register-create-component-decorator";
+import {MethodComponentRegisterService} from "./services/method-component-register";
+import {getPendingMethodRegistrations} from "./decorators/register-method-component-decorator";
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,8 +21,10 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => {
         const updateRegisterService = inject(UpdateComponentRegisterService);
         const createRegisterService = inject(CreateComponentRegisterService);
+        const methodRegisterService = inject(MethodComponentRegisterService);
         const updateRegistrations = getPendingRegistrations();
         const createRegistrations = getPendingCreateRegistrations();
+        const methodRegistrations = getPendingMethodRegistrations();
 
         return () => {
           // Register update components
@@ -30,6 +35,10 @@ export const appConfig: ApplicationConfig = {
           // Register create components
           createRegistrations.forEach(({ key, component }) => {
             createRegisterService.register(key, component);
+          });
+
+          methodRegistrations.forEach(({ key, component }) => {
+            methodRegisterService.register(key, component);
           });
         };
       },

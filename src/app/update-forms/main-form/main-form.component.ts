@@ -14,7 +14,6 @@ import {FacultyUpdateFormComponent} from "../faculty-update-form/faculty-update-
 import {NgIf, NgComponentOutlet} from "@angular/common";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DepartmentUpdateFormComponent} from "../department-update-form/department-update-form.component";
-import {UPDATE_COMPONENTS} from "../../utils/update-component-mapping.util";
 import {UpdateComponentRegisterService} from "../../services/update-component-register.service";
 
 @Component({
@@ -103,5 +102,4 @@ export class MainFormComponent implements OnInit {
     this.uniobjectService.setUpdatingEntity(!this.uniobjectService.getUpdatingEntity());
   }
 
-  protected readonly UPDATE_COMPONENTS = UPDATE_COMPONENTS;
 }

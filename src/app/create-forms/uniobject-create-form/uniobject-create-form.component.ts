@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {RegisterCreateComponent} from "../../decorators/register-create-component-decorator";
 
 
-@RegisterCreateComponent("UniobjectFormForm")
+@RegisterCreateComponent("UniobjectForm")
 @Component({
   selector: 'app-uniobject-create-form',
   standalone: true,

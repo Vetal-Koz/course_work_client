@@ -41,6 +41,7 @@ export class ObjectViewComponent implements OnInit, AfterViewInit {
       }>();
   @Output() onUpdateClick = new EventEmitter();
   @Output() onCreateClick = new EventEmitter();
+  @Output() onMethodClickEmitter = new EventEmitter();
   actionMenuIsOpen = false;
   selectedEntityId?: number;
   uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
@@ -308,6 +309,11 @@ export class ObjectViewComponent implements OnInit, AfterViewInit {
 
   onCreate() {
     this.onCreateClick.emit();
+  }
+
+  handleMethodClick(methodForm: string) {
+    console.log(methodForm);
+    this.onMethodClickEmitter.emit(methodForm);
   }
 
   onRightButtonClick(event: Event) {

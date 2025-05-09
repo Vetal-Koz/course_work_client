@@ -13,6 +13,9 @@ export class UniobjectService {
   updatedEntityClass = "Uniobject";
   isUpdated = false;
   isCreated = false;
+  isMethodInvoked = false;
+  idMethodForInvoking = -1;
+  idObjectForMethodInvoking = -1;
   private uniobjectsUrl = 'http://localhost:8080/api/uniobjects';
   uniobjects: Uniobject[] = [];
   private isUpdatedTreeSubject = new BehaviorSubject<any>(null);
@@ -96,6 +99,26 @@ export class UniobjectService {
 
   getUpdatedTree(): any {
     return this.isUpdatedTreeSubject.value;
+  }
+
+  async getClassMethods(className: string): Promise<any> {
+    const result = await fetch(`http://localhost:8080/api/uniobjects/${className}/methods`)
+
+    if (result.status !== 200) {
+      throw new Error(result.statusText)
+    }
+
+    return await result.json();
+  }
+
+  async invokeMethodForEntity(methodId: number, body: any) {
+    const result = await fetch(`http://localhost:8080/api/uniobjects/methods/invoke/${methodId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body),
+    });
   }
 
   constructor(private http: HttpClient) {}

@@ -16,7 +16,6 @@ import {FacultyCreateFormComponent} from "../faculty-create-form/faculty-create-
 import {NgIf} from "@angular/common";
 import {DepartmentCreateFormComponent} from "../department-create-form/department-create-form.component";
 import {Uniobject} from "../../models/uniobject.data";
-import {CREATE_COMPONENTS} from "../../utils/create-component-mapping.utils";
 import {CreateComponentRegisterService} from "../../services/create-component-register";
 
 @Component({

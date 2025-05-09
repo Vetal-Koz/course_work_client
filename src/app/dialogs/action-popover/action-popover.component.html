@@ -2,6 +2,14 @@
   <button class="insert-button" (click)="onCreate()">Вставити</button>
   @if (!isFromRoot) {
     <button class="update-button" (click)="onUpdate()">Відкрити</button>
+    @for (method of methods; track method.methodName) {
+      <button class="delete-button" (click)="onMethod(method.methodName)">
+        {{method.methodName}}
+      </button>
+    }
     <button class="delete-button" (click)="onDelete()">Видалити</button>
   }
 </div>
+
+
+<ng-container #classUpdateForm></ng-container>

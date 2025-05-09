@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SubdivisionUpdateFormComponent} from "../subdivision-update-form/subdivision-update-form.component";
-import {IsUpdating} from "../../models/is-updating.data";
 import {UniobjectService} from "../../services/uniobject.service";
 import {RegisterUpdateComponent} from "../../decorators/register-update-component-decorator";
 

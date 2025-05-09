@@ -1,6 +1,7 @@
 <div class="body">
   <app-object-view (onCreateClick)="showCreateDialog()"
                    (onUpdateClick)="showUpdateDialog()"
+                   (onMethodClickEmitter)="showMethodDialog($event)"
                    (rightClickEvent)="loadForm($event)"
   />
 
@@ -19,4 +20,9 @@
       </app-main-form-create>
     }
   </dialog>
+
+  <dialog #methodDialog>
+    <ng-container #formMethod />
+  </dialog>
+
 </div>

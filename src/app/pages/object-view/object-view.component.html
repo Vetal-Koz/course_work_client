@@ -25,6 +25,7 @@
     >
       <app-action-popover (onCreateClick)="onCreate()"
                           (onUpdateClick)="onUpdate()"
+                          (onMethodClick)="handleMethodClick($event)"
                           [entity]="{ id: 0, className: 'root' }"
                           [isFromRoot]="true"
       />
@@ -53,8 +54,12 @@
                       itemTemplate="node-list"
         >
           <div *dxTemplate="let node of 'node-list'">
-            <app-node (onCreateClick)="onCreate()" (onUpdateClick)="onUpdate()"
-                      [entity]="{ id: node.id, name: node.name, className: node.classEntityName }">
+            <app-node
+              (onCreateClick)="onCreate()"
+              (onUpdateClick)="onUpdate()"
+              (onMethodClick)="handleMethodClick($event)"
+              [entity]="{ id: node.id, name: node.name, className: node.classEntityName }"
+            >
             </app-node>
           </div>
         </dx-tree-view>

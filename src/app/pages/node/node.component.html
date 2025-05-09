@@ -35,6 +35,8 @@
     >
     <app-action-popover (onCreateClick)="onCreate()"
                         (onUpdateClick)="onUpdate()"
+                        (onMethodClick)="handleMethodClick($event)"
+
                         [entity]="{ id: entity.id, className: entity.className }"/>
   </ng-template>
 </div>
