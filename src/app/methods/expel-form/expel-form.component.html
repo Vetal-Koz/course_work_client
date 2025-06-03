@@ -1,20 +1,12 @@
-<form [formGroup]="expelForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="expelForm">
   <h2 class="h-4 font-bold align-middle">
     Форма для виключення з університету
   </h2>
-
   <div class="flex flex-col">
     <label class="control-label" for="record-book">Номер залікової книжки</label>
     <input class="control" id="record-book" type="number" formControlName="recordBook">
   </div>
 
-  <div class="flex flex-col">
-    <label class="control-label" for="date">Дата виключення</label>
-    <input class="control" id="date" type="date" formControlName="expelDate">
-  </div>
+  <app-person-expel-form [parentForm]="parentForm"/>
 
-  <div class="control-buttons mt-3">
-    <button class="save-button" type="submit">Зберегти</button>
-    <button class="cancel-button" type="button" (click)="onClose()">Відмінити</button>
-  </div>
 </form>

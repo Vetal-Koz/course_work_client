@@ -5,11 +5,12 @@ import {MainFormComponent} from "../../update-forms/main-form/main-form.componen
 import {MainFormCreateComponent} from "../../create-forms/main-form-create/main-form-create.component";
 import {SelectObjectViewComponent} from "../select-object-view/select-object-view.component";
 import {MethodComponentRegisterService} from "../../services/method-component-register";
+import {BaseFormComponent} from "../../methods/base-form/base-form.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ObjectViewComponent, MainFormComponent, MainFormCreateComponent, SelectObjectViewComponent],
+  imports: [ObjectViewComponent, MainFormComponent, MainFormCreateComponent, SelectObjectViewComponent, BaseFormComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -18,7 +19,7 @@ export class MainComponent {
   @ViewChild("createDialog") createDialog!: ElementRef<HTMLDialogElement>;
   @ViewChild('methodDialog') methodDialog!: ElementRef<HTMLDialogElement>;
 
-  @ViewChild('formMethod', { read: ViewContainerRef }) container!: ViewContainerRef;
+  @ViewChild('baseFormRef') baseFormComponent!: BaseFormComponent;
 
 
 
@@ -47,20 +48,16 @@ export class MainComponent {
   }
 
   showMethodDialog(methodForm: string) {
-    const dataContainer = this.methodService.getComponent(methodForm);
-    if (dataContainer) {
-      this.container.clear();
-      const componentRef = this.container.createComponent(dataContainer);
+    this.baseFormComponent.methodForm = methodForm;
+    this.baseFormComponent.loadMethodForm();
 
-      componentRef.instance.formSubmitted.subscribe(() => {
-        this.methodDialog.nativeElement.close();
-      });
+    this.baseFormComponent.formSubmitted.subscribe(() => {
+      this.methodDialog.nativeElement.close();
+    });
 
-      componentRef.instance.dialogClosed.subscribe(() => {
-        this.methodDialog.nativeElement.close();
-      });
-    }
-
+    this.baseFormComponent.dialogClosed.subscribe(() => {
+      this.methodDialog.nativeElement.close();
+    });
 
     this.methodDialog.nativeElement.showModal();
   }

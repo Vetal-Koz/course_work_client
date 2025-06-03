@@ -1,34 +1,33 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RegisterMethodComponent} from "../../decorators/register-method-component-decorator";
 import {UniobjectService} from "../../services/uniobject.service";
+import {PersonExpelFormComponent} from "../person-expel-form/person-expel-form.component";
 
 @RegisterMethodComponent("ExpelForm")
 
 @Component({
   selector: 'app-expel-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PersonExpelFormComponent],
   templateUrl: './expel-form.component.html',
   styleUrl: './expel-form.component.css'
 })
 
 export class ExpelFormComponent implements OnInit {
-  @Output() formSubmitted = new EventEmitter();
-  @Output() dialogClosed = new EventEmitter();
+  @Input() parentForm!: FormGroup;
   expelForm!: FormGroup;
   entityId = 0;
 
   constructor(private fb: FormBuilder, private uniobjectService: UniobjectService) {
     this.entityId = uniobjectService.idObjectForMethodInvoking;
+    this.expelForm = this.fb.group({
+      recordBook: ['', [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
-    this.expelForm = this.fb.group({
-      entityId: [this.entityId, Validators.required],
-      recordBook: ['', [Validators.required]],
-      expelDate: ['', Validators.required]
-    });
+    this.parentForm.addControl('recordBook', this.expelForm.get('recordBook'));
   }
 
 
@@ -38,7 +37,6 @@ export class ExpelFormComponent implements OnInit {
       const formData = this.expelForm.value;
       console.log('Form submitted:', formData);
       await this.uniobjectService.invokeMethodForEntity(this.uniobjectService.idMethodForInvoking, formData)
-      this.formSubmitted.emit();
     } else {
       console.warn('Form is invalid');
       this.expelForm.markAllAsTouched();
@@ -46,7 +44,6 @@ export class ExpelFormComponent implements OnInit {
   }
 
   onClose() {
-    this.dialogClosed.emit();
   }
 
 }

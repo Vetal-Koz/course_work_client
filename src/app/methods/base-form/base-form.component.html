@@ -1,0 +1,9 @@
+<form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+
+  <ng-container #formMethod />
+
+  <div class="control-buttons mt-3">
+  <button class="save-button" type="submit">Зберегти</button>
+  <button class="cancel-button" type="button" (click)="onClose()">Відмінити</button>
+</div>
+</form>

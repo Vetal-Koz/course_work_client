@@ -1,5 +1,5 @@
 <form class="main-form" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
-  <label class="class-label" for="classEntityName">Select Entity Type:</label>
+  <label class="class-label" for="classEntityName">Виберіть тип об'єкту:</label>
   <select class="control" id="classEntityName" formControlName="classEntityName" (change)="onEntityTypeChange()">
     @for (type of relatedTypes; track type) {
       <option [value]="type">{{ type }}</option>

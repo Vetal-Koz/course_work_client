@@ -3,9 +3,9 @@ import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 import {DxSortableModule, DxTreeViewComponent, DxTreeViewModule} from "devextreme-angular";
 import {ActionPopoverComponent} from "../../dialogs/action-popover/action-popover.component";
 import {NodeComponent} from "../node/node.component";
-import {Uniobject} from "../../models/uniobject.data";
 import {UniobjectService} from "../../services/uniobject.service";
 import {FormsModule} from "@angular/forms";
+import {BaseObjectViewComponent} from "../base-object-view/base-object-view-component";
 
 @Component({
   selector: 'app-select-object-view',
@@ -22,17 +22,15 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './select-object-view.component.html',
   styleUrl: './select-object-view.component.css'
 })
-export class SelectObjectViewComponent implements OnInit {
+export class SelectObjectViewComponent extends BaseObjectViewComponent implements OnInit {
   @ViewChild('university') universityComponent!: DxTreeViewComponent;
   @Input({required: true}) selectedClass!: string;
   @Input() selectedObjectId? : any;
   @Output() selectedItem = new EventEmitter<any>();
-  uniobjectsForTree: Uniobject[] = [];
-  uniobjects: Uniobject[] = [];
-  mainObject? : Uniobject;
 
 
   constructor(private uniobjectService: UniobjectService) {
+    super();
   }
 
 

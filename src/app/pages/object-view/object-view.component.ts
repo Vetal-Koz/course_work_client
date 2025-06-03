@@ -5,9 +5,10 @@ import {Uniobject} from "../../models/uniobject.data";
 import {UniobjectService} from "../../services/uniobject.service";
 import {DxSortableTypes} from "devextreme-angular/ui/sortable";
 import {DxTreeViewTypes} from "devextreme-angular/ui/tree-view";
-import {BehaviorSubject, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 import {ActionPopoverComponent} from "../../dialogs/action-popover/action-popover.component";
+import {BaseObjectViewComponent} from "../base-object-view/base-object-view-component";
 
 
 type TreeView = ReturnType<ObjectViewComponent['getTreeView']>;
@@ -29,7 +30,7 @@ type Item = DxTreeViewTypes.Item;
   templateUrl: './object-view.component.html',
   styleUrl: './object-view.component.css'
 })
-export class ObjectViewComponent implements OnInit, AfterViewInit {
+export class ObjectViewComponent extends BaseObjectViewComponent implements OnInit, AfterViewInit {
   // @ts-ignore
   @ViewChild('university') universityComponent: DxTreeViewComponent;
   @ViewChild("wrapper") wrapperComponent!: ElementRef;
@@ -44,15 +45,13 @@ export class ObjectViewComponent implements OnInit, AfterViewInit {
   @Output() onMethodClickEmitter = new EventEmitter();
   actionMenuIsOpen = false;
   selectedEntityId?: number;
-  uniobjects: Uniobject[] = this.uniobjectService.uniobjects;
-  uniobjectsForTree: Uniobject[] = [];
-  mainObject? : Uniobject;
   private createItemSub!: Subscription;
   private deleteItemSub!: Subscription;
   private resizeObserver!: ResizeObserver;
 
 
   constructor(private uniobjectService: UniobjectService) {
+    super();
   }
 
 
@@ -69,6 +68,8 @@ export class ObjectViewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.uniobjects = this.uniobjectService.uniobjects;
+
     this.uniobjectService.findAllWhereMajorIsNull().subscribe(res => {
       this.uniobjects.push(...res);
       this.uniobjectsForTree.push(...res);
